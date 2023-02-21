@@ -25,17 +25,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto  mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link text-white" href="#">Home</a>
+              <a class="nav-link text-white" href="{{route('home')}}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="categories.html">Categories</a>
+              <a class="nav-link text-white" href="{{route('categories')}}">Categories</a>
             </li>
           </ul>
 
-          <ul class="navbar-nav ms-auto  mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">Log In</a>
-            </li>
+          
+            @if (Auth::check())
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="profile-icon">
@@ -43,11 +41,25 @@
                 </span>
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                <li><a class="dropdown-item" href="{{route('dashboard')}}">Dashboard</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Log Out</a></li>
+                <li>
+                  <a href="#" class="dropdown-item" onclick="logOutFrom()">Logout</a>
+                            <form action="{{route('logout')}}" method="POST" id="logout">
+                                @csrf
+                            </form>
+                </li>
               </ul>
             </li>
+            @else
+            <ul class="navbar-nav ms-auto  mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{{route('login')}}">Log In</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{{route('register')}}">Register</a>
+              </li>
+              @endif
           </ul>
 
         </div>
@@ -65,6 +77,13 @@
         </div>
       </div>
     </footer>
+    <script>
+      function logOutFrom(){
+          event.preventDefault();
+          var from = document.getElementById("logout");
+          from.submit();
+      }
+  </script>
     <script src="{{asset('/')}}frontend-assets/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/45f49eb8bc.js" crossorigin="anonymous"></script>
   </body>
