@@ -34,3 +34,14 @@ Route::group(['as'=>'user.','prefix'=>'user','namespace'=>'user','middleware'=>[
 Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'admin','middleware'=>['auth:sanctum',config('jetstream.auth_session'),'verified','role:admin']],function () {
     Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
 });
+
+
+Route::controller(CategoryController::class)->group(function(){
+    Route::get('/category/create','create')->name('category-create');
+    Route::post('/category/store', 'store')->name('category-store');
+    // Route::get('/categories','index')->name('category-manage');
+    Route::get('/category/delete/{cat_id}',  'delete')->name('category-delete');
+    Route::get('/category/edit/{cat_id}',  'edit')->name('category-edit');
+    Route::post('/category/update/{cat_id}',  'update')->name('category-update');
+    
+});

@@ -22,6 +22,6 @@ class HomeController extends Controller
     }
 
     function categories () {
-        return view('frontend.category.index');
+        return view('frontend.categories.index');
     }
 }
