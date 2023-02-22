@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 class UserDashboardController extends Controller
 {
     function index() {
-        return view('dashboard');
+        return view('backend.user-dashboard.index');
     }
 }

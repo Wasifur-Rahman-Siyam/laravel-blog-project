@@ -12,11 +12,12 @@
                 <ul class="dropdown-menu pull-right">
                     <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>
-                    <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
-                    <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+                    <li>
+                        <a href="#" class="dropdown-item" onclick="logOutFrom()"><i class="material-icons">input</i>Log Out</a>
+                        <form action="{{route('logout')}}" method="POST" id="logout">
+                            @csrf
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -27,10 +28,37 @@
         <ul class="list">
             <li class="header">MAIN NAVIGATION</li>
             <li class="active">
+                <a href="{{route('home')}}">
+                    <i class="material-icons">home</i>
+                    <span>Home</span>
+                </a>
+            </li>
+            @if (auth()->user()->hasRole('admin'))
+            <li>
                 <a href="index.html">
                     <i class="material-icons">home</i>
                     <span>Home</span>
                 </a>
+            </li>
+            @endif
+            @if (auth()->user()->hasRole('user'))
+            <li>
+                <a href="index.html">
+                    <i class="material-icons">home</i>
+                    <span>Home</span>
+                </a>
+            </li>
+            @endif
+
+            <li class="header">System</li>
+            <li>
+                <a href="#" class="dropdown-item" onclick="logOutFrom()">
+                    <i class="material-icons">input</i>
+                    <span>Log Out</span>
+                </a>
+                <form action="{{route('logout')}}" method="POST" id="logout">
+                    @csrf
+                </form>
             </li>
         </ul>
     </div>

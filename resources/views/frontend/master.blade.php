@@ -32,8 +32,19 @@
             </li>
           </ul>
 
-          
-            @if (Auth::check())
+          <ul class="navbar-nav ms-auto  mb-2 mb-lg-0">
+
+            @if (!Auth::check())
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{{route('login')}}">Log In</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{{route('register')}}">Register</a>
+            </li>
+            
+            @else
+
+
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="profile-icon">
@@ -51,17 +62,10 @@
                 </li>
               </ul>
             </li>
-            @else
-            <ul class="navbar-nav ms-auto  mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link text-white" href="{{route('login')}}">Log In</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="{{route('register')}}">Register</a>
-              </li>
-              @endif
+            @endif
           </ul>
 
+          
         </div>
       </div>
     </nav>
