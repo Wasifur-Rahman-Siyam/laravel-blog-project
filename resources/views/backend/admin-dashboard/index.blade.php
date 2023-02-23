@@ -1,4 +1,4 @@
-@extends('backend.backend-master')
+@extends('backend.dashboard-master')
 @section('title','Blog-Dashboard')
 @section('content')
 

@@ -27,21 +27,28 @@
     <div class="menu">
         <ul class="list">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active">
-                <a href="{{route('home')}}">
+
+            @if (auth()->user()->hasRole('admin'))
+            <li class="{{Request::is('admin/dashboard') ? 'active': ''}}"">
+                <a href="{{route('dashboard')}}">
                     <i class="material-icons">home</i>
-                    <span>Home</span>
+                    <span>Dashboard</span>
                 </a>
             </li>
-            @if (auth()->user()->hasRole('admin'))
-            <li>
-                <a href="index.html">
-                    <i class="material-icons">home</i>
-                    <span>Home</span>
+            <li class="{{Request::is('admin/tag*') ? 'active': ''}}">
+                <a href="{{route('admin.tag.index')}}">
+                    <i class="material-icons">label</i>
+                    <span>Tag</span>
                 </a>
             </li>
             @endif
             @if (auth()->user()->hasRole('user'))
+            <li class="{{Request::is('user/dashboard') ? 'active': ''}}"">
+                <a href="{{route('dashboard')}}">
+                    <i class="material-icons">home</i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
             <li>
                 <a href="index.html">
                     <i class="material-icons">home</i>

@@ -30,4 +30,6 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="{{asset('/')}}backend-assets/css/themes/all-themes.css" rel="stylesheet" />
+
+    <link href="{{asset('/')}}backend-assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
 </head>

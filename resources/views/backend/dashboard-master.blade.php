@@ -1,6 +1,6 @@
 
-@include('backend.includs.header')
-<body class="theme-red">
+@include('backend.includs.dashboard-header')
+<body class="theme-black">
     <!-- Page Loader -->
 
     <!-- Overlay For Sidebars -->
@@ -32,4 +32,4 @@
 
     </section>
 
-    @include('backend.includs.footer')
+    @include('backend.includs.dashboard-footer')
