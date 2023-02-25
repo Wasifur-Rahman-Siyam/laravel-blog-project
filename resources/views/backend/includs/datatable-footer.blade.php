@@ -5,7 +5,17 @@
         var from = document.getElementById("logout");
         from.submit();
     }
+
+    function deleteFrom(){
+        if(confirm('Are u sure delete this brand')){
+            event.preventDefault();
+            var from = document.getElementById("delete");
+            from.submit();
+        }
+    }
 </script>
+
+
 
 
     <!-- Jquery Core Js -->

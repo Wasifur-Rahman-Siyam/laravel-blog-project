@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TagController extends Controller
 {
@@ -14,7 +16,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        return view('backend.tag.index');
+        $tags = Tag::latest()->get();
+        return view('backend.tag.index', compact('tags'));
     }
 
     /**
@@ -35,7 +38,18 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'          => 'required|max:60',
+        ],[
+            'name.required'         => 'The Tag name field is required.'
+        ]);
+        $tag = new Tag();
+        $tag->name  =   $request->name;
+        $tag->slug  =   Str::slug($request->name);
+        $tag->save();
+        
+        return redirect()->back()->with('msg', 'Tag Added Successfully');
+
     }
 
     /**
@@ -57,7 +71,9 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tag = Tag::Find($id);
+        return view('backend.tag.edit', compact('tag'));
+        
     }
 
     /**
@@ -69,7 +85,17 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name'          => 'required|max:60',
+        ],[
+            'name.required'         => 'The Tag name field is required.'
+        ]);
+        $tag = Tag::Find($id);
+        $tag->name  =   $request->name;
+        $tag->slug  =   Str::slug($request->name);
+        $tag->save();
+        
+        return redirect()->route('admin.tag.index')->with('msg', 'Tag Updated Successfully');
     }
 
     /**
@@ -80,6 +106,8 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tag = Tag::Find($id);
+        $tag ->delete();
+        return redirect()->back()->with('msg', 'Tag Deleted Successfully');
     }
 }

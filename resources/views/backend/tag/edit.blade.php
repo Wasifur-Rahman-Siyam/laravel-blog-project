@@ -1,5 +1,5 @@
 @extends('backend.datatable-master')
-@section('title','Create Tag')
+@section('title','Edit Tag')
 @section('content')
 <div class="container-fluid">
     <!-- Vertical Layout | With Floating Label -->
@@ -8,16 +8,17 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        Add New Tag
+                        Edit Tag
                     </h2>
                 </div>
                 <div class="body">
                     @include('backend.partials.massage')
-                    <form action="{{route('admin.tag.store')}}" method="POST">
+                    <form action="{{route('admin.tag.update',$tag->id)}}" method="POST">
                         @csrf
+                        @method('put')
                         <div class="form-group form-float">
                             <div class="form-line">
-                                <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}">
+                                <input type="text" class="form-control" id="name" name="name" value="{{$tag->name}}">
                                 <label class="form-label">Tag Name</label>
                             </div>
                         </div>
