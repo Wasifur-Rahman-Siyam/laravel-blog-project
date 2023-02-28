@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Backend\Admin\CategoryController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\User\UserController;
@@ -28,27 +28,17 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
 |--------------------------------------------------------------------------
 */
 
-Route::group(['as'=>'user.','prefix'=>'user','namespace'=>'user','middleware'=>['auth:sanctum',config('jetstream.auth_session'),'verified','role:user']],function () {
+Route::group(['as'=>'user.','prefix'=>'user','middleware'=>['auth:sanctum',config('jetstream.auth_session'),'verified','role:user']],function () {
     Route::get('/dashboard', [UserDashboardController::class,'index'])->name('dashboard');
 });
 
-Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'admin','middleware'=>['auth:sanctum',config('jetstream.auth_session'),'verified','role:admin']],function () {
-    Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
-    Route::resource('tag', TagController::class);
-});
+// Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'admin','middleware'=>['auth:sanctum',config('jetstream.auth_session'),'verified','role:admin']],function () {
+//     Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
+// });
 
 Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth:sanctum',config('jetstream.auth_session'),'verified','role:admin']],function () {
+    Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
     Route::resource('tag', TagController::class);
+    Route::resource('category',CategoryController::class);
 });
 
-
-
-// Route::controller(CategoryController::class)->group(function(){
-//     Route::get('/category/create','create')->name('category-create');
-//     Route::post('/category/store', 'store')->name('category-store');
-//     // Route::get('/categories','index')->name('category-manage');
-//     Route::get('/category/delete/{cat_id}',  'delete')->name('category-delete');
-//     Route::get('/category/edit/{cat_id}',  'edit')->name('category-edit');
-//     Route::post('/category/update/{cat_id}',  'update')->name('category-update');
-    
-// });

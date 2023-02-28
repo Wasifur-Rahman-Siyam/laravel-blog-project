@@ -41,6 +41,12 @@
                     <span>Tag</span>
                 </a>
             </li>
+            <li class="{{Request::is('admin/category*') ? 'active': ''}}">
+                <a href="{{route('admin.category.index')}}">
+                    <i class="material-icons">apps</i>
+                    <span>Category</span>
+                </a>
+            </li>
             @endif
             @if (auth()->user()->hasRole('user'))
             <li class="{{Request::is('user/dashboard') ? 'active': ''}}"">

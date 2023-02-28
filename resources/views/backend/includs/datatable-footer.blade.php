@@ -7,7 +7,7 @@
     }
 
     function deleteFrom(){
-        if(confirm('Are u sure delete this brand')){
+        if(confirm('Are u sure delete this')){
             event.preventDefault();
             var from = document.getElementById("delete");
             from.submit();
