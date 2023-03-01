@@ -16,6 +16,7 @@
                 <div class="header">
                     <h2>
                         All Categories
+                        <span class="badge bg-blue">{{$categories->count()}}</span>
                     </h2>
                 </div>
                 <div class="body">
@@ -25,6 +26,7 @@
                                 <tr>
                                     <th>Sl No.</th>
                                     <th>Name</th>
+                                    <th>Post Count</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -32,6 +34,7 @@
                                 <tr>
                                     <th>Sl No.</th>
                                     <th>Name</th>
+                                    <th>Post Count</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -40,6 +43,7 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$category->name}}</td>
+                                    <td>{{$category->post->count()}}</td>
                                     <td >
                                         <a href="{{route('admin.category.edit',$category->id)}}" class="btn btn-primary">
                                             <i class="material-icons">edit</i>

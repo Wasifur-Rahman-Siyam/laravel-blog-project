@@ -1,5 +1,5 @@
 @extends('backend.dashboard-master')
-@section('title','Add category')
+@section('title','Edit category')
 @section('content')
 <div class="container-fluid">
     <!-- Vertical Layout | With Floating Label -->
@@ -13,11 +13,12 @@
                 </div>
                 <div class="body">
                     @include('backend.partials.massage')
-                    <form action="{{route('admin.category.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('admin.category.update',$category ->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('put')
                         <div class="mb-5">
                             <label for="name" class="form-label">Category Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}">
+                            <input type="text" class="form-control" id="name" name="name" value="{{$category ->name}}">
                         </div>
                         @error("name")
                         <div>
@@ -26,7 +27,7 @@
                         @enderror
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Image</label>
-                            <input type="file" class="form-control" id="image" name="image" value="{{old('image')}}">
+                            <input type="file" class="form-control" id="image" name="image">
                           </div>
                         @error("image")
                         <div>
