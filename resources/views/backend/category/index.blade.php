@@ -51,8 +51,6 @@
                                             @csrf
                                             @method('DELETE')
                                         </form>
-
-                                        {{-- return confirm('Are u sure delete this brand'); --}}
                                     </td>
                                 </tr>
                                 @endforeach

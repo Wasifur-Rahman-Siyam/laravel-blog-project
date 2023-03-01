@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Helpers\UploadHelper;
+use Illuminate\Support\Facades\File; 
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use PhpParser\Node\Expr\New_;
@@ -90,8 +91,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $Category = Category::find($id);
-        return view('backend.category.edit',compact('Category'));
+        $category = Category::find($id);
+        return view('backend.category.edit',compact('category'));
     }
 
     /**
@@ -103,7 +104,44 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+        $request->validate([
+            'name'          => 'required|max:60|unique:categories,name,'.$category->id,
+            'image'         => 'image|mimes:jpg,png,jpeg,gif,svg'
+        ],[
+            'name.required'         => 'The Category name field is required.'
+        ]);
+        $category->name  =   $request->name;
+        $category->slug  =   Str::slug($request->name);
+        $category->save();
+        $image= $request->image;
+        if($image){
+            $extension = $image->getClientOriginalExtension();
+            $fileName = $category->slug.'-'.$category->id.'.'.$extension;
+
+            $deleteImage = 'images/categories/banner/'.$category->image;
+            if(File::exists($deleteImage)){
+               File::delete($deleteImage);
+            }
+            if (!file_exists('images/categories/banner/')) {
+                mkdir('images/categories/banner/', 666, true);
+            }
+            $path = 'images/categories/banner/' . $fileName;
+            Image::make($image)->resize(1600,479)->save($path);
+
+            $deleteImage = 'images/categories/card/'.$category->image;
+            if(File::exists($deleteImage)){
+               File::delete($deleteImage);
+            }
+            if (!file_exists('images/categories/card/')) {
+                mkdir('images/categories/card/', 666, true);
+            }
+            $path = 'images/categories/card/' . $fileName;
+            Image::make($image)->resize(353,253)->save($path);
+            $category->image = $fileName;
+            $category->save();
+        }
+        return redirect()->back()->with('msg', 'Category Added Successfully');
     }
 
     /**
@@ -114,6 +152,18 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $deleteImage1 = 'images/categories/banner/'.$category->image;
+        $deleteImage2 = 'images/categories/card/'.$category->image;
+        $category ->delete();
+
+        if(File::exists($deleteImage1)){
+            File::delete($deleteImage1);
+        }
+        if(File::exists($deleteImage2)){
+            File::delete($deleteImage2);
+        }
+        
+        return redirect()->back()->with('msg', 'Tag Deleted Successfully');
     }
 }
