@@ -21,6 +21,9 @@
     <!-- Animation Css -->
     <link href="{{asset('/')}}backend-assets/plugins/animate-css/animate.css" rel="stylesheet" />
 
+    <!-- Bootstrap Select Css -->
+    <link href="{{asset('/')}}backend-assets/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
     <!-- JQuery DataTable Css -->
     <link href="{{asset('/')}}backend-assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
 
@@ -29,4 +32,9 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="{{asset('/')}}backend-assets/css/themes/all-themes.css" rel="stylesheet" />
+
+    <!-- ckeditor -->
+    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script> --}}
+    <script src="{{asset('/')}}ckeditor5/ckeditor.js"></script>
+
 </head>

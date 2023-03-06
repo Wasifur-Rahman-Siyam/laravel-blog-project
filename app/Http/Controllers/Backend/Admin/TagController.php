@@ -39,7 +39,7 @@ class TagController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'          => 'required|max:60',
+            'name'          => 'required|max:60|unique:tags',
         ],[
             'name.required'         => 'The Tag name field is required.'
         ]);
@@ -85,8 +85,9 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $tag = Tag::find($id);
         $request->validate([
-            'name'          => 'required|max:60',
+            'name'          => 'required|max:60|unique:tags,name,'.$tag->id,
         ],[
             'name.required'         => 'The Tag name field is required.'
         ]);

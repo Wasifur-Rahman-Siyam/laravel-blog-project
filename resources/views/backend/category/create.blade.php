@@ -1,4 +1,4 @@
-@extends('backend.dashboard-master')
+@extends('backend.datatable-master')
 @section('title','Add category')
 @section('content')
 <div class="container-fluid">

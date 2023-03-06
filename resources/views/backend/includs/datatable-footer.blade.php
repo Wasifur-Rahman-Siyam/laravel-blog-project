@@ -13,9 +13,16 @@
             from.submit();
         }
     }
+
 </script>
 
-
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#post-body' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
 
 
     <!-- Jquery Core Js -->
