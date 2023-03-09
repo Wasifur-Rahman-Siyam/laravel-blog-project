@@ -32,6 +32,7 @@
                                     </th>
                                     <th>Is Approved</th>
                                     <th>Is Active</th>
+                                    <th>Preview</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -45,6 +46,7 @@
                                     </th>
                                     <th>Is Approved</th>
                                     <th>Is Active</th>
+                                    <th>Preview</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -69,7 +71,12 @@
                                             <span class="badge bg-yellow">Inactive</span>
                                         @endif
                                     </td>
-                                    <td >
+                                    <td>
+                                        <a href="{{route('admin.post.show',$post->id)}}" class="btn btn-success">
+                                            <i class="material-icons">visibility</i>
+                                        </a>
+                                    </td>
+                                    <td>
                                         <a href="{{route('admin.post.edit',$post->id)}}" class="btn btn-primary">
                                             <i class="material-icons">edit</i>
                                         </a>

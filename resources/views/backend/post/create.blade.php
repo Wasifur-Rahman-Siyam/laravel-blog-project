@@ -79,7 +79,7 @@
                             <span class="text-danger">{{ $message }}</span>
                         </div>
                         @enderror
-                            <a href="{{route('admin.category.index')}}" class="btn btn-danger m-t-15 waves-effect">BACK</a>
+                            <a href="{{route('admin.post.index')}}" class="btn btn-danger m-t-15 waves-effect">BACK</a>
                             <button type="submit" class="btn btn-primary m-t-15 waves-effect">SUBMIT</button>
                     </div>
                 </div>

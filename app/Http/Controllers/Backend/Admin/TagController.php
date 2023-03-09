@@ -17,7 +17,7 @@ class TagController extends Controller
     public function index()
     {
         $tags = Tag::latest()->get();
-        return view('backend.tag.index', compact('tags'));
+        return view('backend.admin.tag.index', compact('tags'));
     }
 
     /**
@@ -27,7 +27,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('backend.tag.create');
+        return view('backend.admin.tag.create');
     }
 
     /**
@@ -72,7 +72,7 @@ class TagController extends Controller
     public function edit($id)
     {
         $tag = Tag::Find($id);
-        return view('backend.tag.edit', compact('tag'));
+        return view('backend.admin.tag.edit', compact('tag'));
         
     }
 

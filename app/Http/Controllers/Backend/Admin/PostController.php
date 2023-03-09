@@ -70,10 +70,10 @@ class PostController extends Controller
         if($image){
             $extension = $image->getClientOriginalExtension();
             $fileName = $post->slug.'-'.$post->id.'.'.$extension;
-            if (!file_exists('images/posts')) {
-                mkdir('images/posts', 666, true);
+            if (!file_exists('images/posts/')) {
+                mkdir('images/posts/', 666, true);
             }
-            $path = 'images/posts' . $fileName;
+            $path = 'images/posts/' . $fileName;
             Image::make($image)->resize(1600,1066)->save($path);
             $post->image = $fileName;
             $post->save();
@@ -92,7 +92,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('backend.post.show',compact('post'));
     }
 
     /**
@@ -141,14 +141,14 @@ class PostController extends Controller
             $extension = $image->getClientOriginalExtension();
             $fileName = $post->slug.'-'.$post->id.'.'.$extension;
 
-            $deleteImage = 'images/posts'.$post->image;
+            $deleteImage = 'images/posts/'.$post->image;
             if(File::exists($deleteImage)){
                File::delete($deleteImage);
             }
             if (!file_exists('images/posts')) {
-                mkdir('images/posts', 666, true);
+                mkdir('images/posts/', 666, true);
             }
-            $path = 'images/posts' . $fileName;
+            $path = 'images/posts/' . $fileName;
             Image::make($image)->resize(1600,966)->save($path);
             $post->image = $fileName;
             $post->save();
@@ -167,6 +167,13 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $deleteImage = 'images/posts/'.$post->image;
+            if(File::exists($deleteImage)){
+               File::delete($deleteImage);
+            }
+        $post->categories()->detach();
+        $post->tags()->detach();
+        $post->delete();
+        return redirect()->back()->with('msg', 'Post Deleted Successfully');
     }
 }
