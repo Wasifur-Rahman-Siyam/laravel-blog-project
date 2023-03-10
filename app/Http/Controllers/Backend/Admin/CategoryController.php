@@ -69,7 +69,7 @@ class CategoryController extends Controller
             $Category->image = $fileName;
             $Category->save();
         }
-        return redirect()->back()->with('msg', 'Category Added Successfully');
+        return redirect()->route('admin.category.index')->with('msg', 'Category Added Successfully');
     }
 
     /**
@@ -141,7 +141,7 @@ class CategoryController extends Controller
             $category->image = $fileName;
             $category->save();
         }
-        return redirect()->back()->with('msg', 'Category Added Successfully');
+        return redirect()->route('admin.category.index')->with('msg', 'Category Added Successfully');
     }
 
     /**

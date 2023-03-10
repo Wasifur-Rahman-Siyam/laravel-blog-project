@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <!-- Vertical Layout | With Floating Label -->
-    <form action="{{route('admin.post.update',$post->id)}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('user.post.update',$post->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         @include('backend.partials.massage')
@@ -54,7 +54,7 @@
                     <div class="body">
                         <div class="form-group">
                             <label for="category">Select Category : </label><br>
-                            <select class="form-select" aria-label="Default select example" name="categories[]" id="category">
+                            <select class="form-select" aria-label="Default select example" name="categories[]" id="category" multiple>
                                 <option></option>
                                 @foreach ( $categories as $category)
                                     <option
@@ -73,7 +73,7 @@
 
                         <div class="form-group">
                             <label for="category">Select Tag : </label><br>
-                            <select class="form-select" aria-label="Default select example" name="tags[]" id="category">
+                            <select class="form-select" aria-label="Default select example" name="tags[]" id="category" multiple>
                                 <option></option>
                                 @foreach ( $tags as $tag)
                                 <option
@@ -89,7 +89,7 @@
                             <span class="text-danger">{{ $message }}</span>
                         </div>
                         @enderror
-                            <a href="{{route('admin.post.index')}}" class="btn btn-danger m-t-15 waves-effect">BACK</a>
+                            <a href="{{route('user.post.index')}}" class="btn btn-danger m-t-15 waves-effect">BACK</a>
                             <button type="submit" class="btn btn-primary m-t-15 waves-effect">SUBMIT</button>
                     </div>
                 </div>

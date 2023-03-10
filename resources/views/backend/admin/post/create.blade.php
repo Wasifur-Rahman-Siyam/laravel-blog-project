@@ -52,7 +52,7 @@
                     <div class="body">
                         <div class="form-group">
                             <label for="category">Select Category : </label><br>
-                            <select class="form-select" aria-label="Default select example" name="categories[]" id="category">
+                            <select class="form-select" aria-label="Default select example" name="categories[]" id="category" multiple>
                                 <option></option>
                                 @foreach ( $categories as $category)
                                     <option value="{{$category->id}}">{{ $category->name}}</option>
@@ -67,7 +67,7 @@
 
                         <div class="form-group">
                             <label for="category">Select Tag : </label><br>
-                            <select class="form-select" aria-label="Default select example" name="tags[]" id="category">
+                            <select class="form-select" aria-label="Default select example" name="tags[]" id="category" multiple>
                                 <option></option>
                                 @foreach ( $tags as $tag)
                                     <option value="{{$tag->id}}">{{ $tag->name}}</option>

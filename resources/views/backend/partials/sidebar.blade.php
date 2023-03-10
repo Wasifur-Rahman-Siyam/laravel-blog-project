@@ -53,6 +53,12 @@
                     <span>Posts</span>
                 </a>
             </li>
+            <li class="{{Request::is('admin/pending*') ? 'active': ''}}">
+                <a href="{{route('admin.post.pending')}}">
+                    <i class="material-icons">pending</i>
+                    <span>Pending Posts</span>
+                </a>
+            </li>
             @endif
             @if (auth()->user()->hasRole('user'))
             <li class="{{Request::is('user/dashboard') ? 'active': ''}}"">
@@ -61,10 +67,10 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-            <li>
-                <a href="index.html">
-                    <i class="material-icons">home</i>
-                    <span>Home</span>
+            <li class="{{Request::is('user/post*') ? 'active': ''}}">
+                <a href="{{route('user.post.index')}}">
+                    <i class="material-icons">library_books</i>
+                    <span>Posts</span>
                 </a>
             </li>
             @endif

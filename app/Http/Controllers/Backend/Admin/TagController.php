@@ -48,7 +48,7 @@ class TagController extends Controller
         $tag->slug  =   Str::slug($request->name);
         $tag->save();
         
-        return redirect()->back()->with('msg', 'Tag Added Successfully');
+        return redirect()->route('admin.tag.index')->with('msg', 'Tag Added Successfully');
 
     }
 

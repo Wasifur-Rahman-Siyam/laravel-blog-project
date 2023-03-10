@@ -14,6 +14,14 @@
         }
     }
 
+    function approvePostFrom(){
+        if(confirm('Are u sure approve this')){
+            event.preventDefault();
+            var from = document.getElementById("approval-from");
+            from.submit();
+        }
+    }
+
 </script>
 
 <script>

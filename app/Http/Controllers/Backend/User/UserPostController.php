@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Admin;
+namespace App\Http\Controllers\Backend\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
+use App\Models\Category;
 use App\Models\Tag;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File; 
-use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
-use PhpParser\Node\Expr\New_;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class PostController extends Controller
+class UserPostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,8 +22,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->get();
-        return view('backend.admin.post.index',compact('posts'));
+        $posts = Auth::User()->posts()->latest()->get();
+        return view('backend.user.post.index',compact('posts'));
     }
 
     /**
@@ -35,7 +35,7 @@ class PostController extends Controller
     {
         $categories = Category::all();
         $tags = Tag::all();
-        return view('backend.admin.post.create',compact('categories','tags'));
+        return view('backend.user.post.create',compact('categories','tags'));
     }
 
     /**
@@ -64,7 +64,7 @@ class PostController extends Controller
         else{
             $post->status = false;
         }
-        $post->is_approved = true;
+        $post->is_approved = false;
         $post->save();
         $image= $request->image;
         if($image){
@@ -81,7 +81,7 @@ class PostController extends Controller
 
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
-        return redirect()->back()->with('msg', 'Post Added Successfully');
+        return redirect()->route('user.post.index')->with('msg', 'Post Added Successfully');
     }
 
     /**
@@ -92,7 +92,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('backend.admin.post.show',compact('post'));
+        return view('backend.user.post.show',compact('post'));
     }
 
     /**
@@ -105,7 +105,7 @@ class PostController extends Controller
     {
         $categories = Category::all();
         $tags = Tag::all();
-        return view('backend.admin.post.edit',compact('post', 'categories','tags'));
+        return view('backend.user.post.edit',compact('post', 'categories','tags'));
     }
 
     /**
@@ -134,7 +134,7 @@ class PostController extends Controller
         else{
             $post->status = false;
         }
-        $post->is_approved = true;
+        $post->is_approved = false;
         $post->save();
         $image= $request->image;
         if($image){
@@ -156,20 +156,7 @@ class PostController extends Controller
 
         $post->categories()->sync($request->categories);
         $post->tags()->sync($request->tags);
-        return redirect()->back()->with('msg', 'Post Edited Successfully');
-    }
-
-
-    public function pending(){
-        $posts = Post::where('is_approved', false)->get();
-        return view('backend.admin.post.pending',compact('posts'));
-    }
-
-    public function approval($id){
-        $post = Post::Find($id);
-        $post->is_approved = true;
-        $post->save();
-        return redirect()->back()->with('msg', 'Post Approved Successfully');
+        return redirect()->route('user.post.index')->with('msg', 'Post Edited Successfully');
     }
 
     /**
