@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Notifications\UserPostApproved;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File; 
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Notification;
 use PhpParser\Node\Expr\New_;
 
 class PostController extends Controller
@@ -169,6 +171,8 @@ class PostController extends Controller
         $post = Post::Find($id);
         $post->is_approved = true;
         $post->save();
+        $user = $post->user;
+        Notification::send($user,new UserPostApproved($post));
         return redirect()->back()->with('msg', 'Post Approved Successfully');
     }
 

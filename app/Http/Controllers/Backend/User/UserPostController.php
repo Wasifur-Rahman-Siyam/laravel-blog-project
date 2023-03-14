@@ -7,10 +7,12 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Tag;
+use App\Notifications\NewUserPost;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File; 
 use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
 
 class UserPostController extends Controller
@@ -81,6 +83,9 @@ class UserPostController extends Controller
 
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
+        $users = User::role('admin')->get();
+        // $users->notify(new NewUserPost($post));
+        Notification::send($users,new NewUserPost($post));
         return redirect()->route('user.post.index')->with('msg', 'Post Added Successfully');
     }
 
@@ -92,6 +97,9 @@ class UserPostController extends Controller
      */
     public function show(Post $post)
     {
+        if($post->user_id != Auth::id()){
+            return redirect()->back()->with('msg', 'You are not authorized to access this post Post');
+        }
         return view('backend.user.post.show',compact('post'));
     }
 
@@ -103,6 +111,9 @@ class UserPostController extends Controller
      */
     public function edit(Post $post)
     {
+        if($post->user_id != Auth::id()){
+            return redirect()->back()->with('msg', 'You are not authorized to access this post Post');
+        }
         $categories = Category::all();
         $tags = Tag::all();
         return view('backend.user.post.edit',compact('post', 'categories','tags'));
@@ -117,6 +128,9 @@ class UserPostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        if($post->user_id != Auth::id()){
+            return redirect()->back()->with('msg', 'You are not authorized to access this post Post');
+        }
         $request->validate([
             'title'             => 'required|max:60|unique:posts,title,'.$post->id,
             'image'             => 'image|mimes:jpg,png,jpeg,gif,svg',
@@ -167,6 +181,9 @@ class UserPostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if($post->user_id != Auth::id()){
+            return redirect()->back()->with('msg', 'You are not authorized to access this post Post');
+        }
         $deleteImage = 'images/posts/'.$post->image;
             if(File::exists($deleteImage)){
                File::delete($deleteImage);

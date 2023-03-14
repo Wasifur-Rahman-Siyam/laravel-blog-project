@@ -2,6 +2,7 @@
 @section('title','Post details')
 @section('content')
 <div class="container-fluid">
+    @include('backend.partials.massage')
     <a href="{{route('user.post.index')}}" class="btn btn-danger waves-effect">BACK</a>
     @if ($post->is_approved == true)
         <button type="button" class="btn btn-success pull-right">
