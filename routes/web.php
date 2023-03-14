@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\Admin\DashboardController;
 use App\Http\Controllers\Backend\Admin\PostController;
 Use App\Http\Controllers\Backend\User\UserPostController;
 use App\Http\Controllers\Backend\Admin\TagController;
+use App\Http\Controllers\Backend\NotificationsController;
 use App\Http\Controllers\Backend\User\UserDashboardController;
 use GuzzleHttp\Middleware;
 
@@ -26,18 +27,22 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
 
 /*
 |--------------------------------------------------------------------------
-| Admin Routes
+| User Routes
 |--------------------------------------------------------------------------
 */
 
 Route::group(['as'=>'user.','prefix'=>'user','middleware'=>['auth:sanctum',config('jetstream.auth_session'),'verified','role:user']],function () {
     Route::get('/dashboard', [UserDashboardController::class,'index'])->name('dashboard');
     Route::resource('post', UserPostController::class);
+
+    Route::get('/notifications',[NotificationsController::class, 'show'])->name('notifications');
 });
 
-// Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'admin','middleware'=>['auth:sanctum',config('jetstream.auth_session'),'verified','role:admin']],function () {
-//     Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
-// });
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth:sanctum',config('jetstream.auth_session'),'verified','role:admin']],function () {
     Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
@@ -47,6 +52,6 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth:sanctum',con
     
     Route::get('pending/post',[PostController::class,'pending'])->name('post.pending');
     Route::put('/post/{id}/approve',[PostController::class,'approval'])->name('post.approve');
-    
+    Route::get('/notifications',[NotificationsController::class, 'show'])->name('notifications');
 });
 

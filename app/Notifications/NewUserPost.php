@@ -32,7 +32,7 @@ class NewUserPost extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
@@ -61,7 +61,9 @@ class NewUserPost extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            //
+            'username'  => $this->post->user->name,
+            'title'     => $this->post->title,
+            'id'        => $this->post->id
         ];
     }
 }

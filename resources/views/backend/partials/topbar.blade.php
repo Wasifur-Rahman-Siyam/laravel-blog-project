@@ -9,7 +9,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <!-- Notifications -->
                 <li>
-                    <a href="">
+                    <a href="{{(auth()->user()->hasRole('admin')) ? route('admin.notifications') : route('user.notifications')}}">
                         <i class="material-icons" style="font-size: 3rem">notifications</i>
                         <span class="label-count" style="font-size: 1.4rem">10</span>
                     </a>
