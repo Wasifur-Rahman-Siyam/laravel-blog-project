@@ -11,7 +11,7 @@
                 <li>
                     <a href="{{(auth()->user()->hasRole('admin')) ? route('admin.notifications') : route('user.notifications')}}">
                         <i class="material-icons" style="font-size: 3rem">notifications</i>
-                        <span class="label-count" style="font-size: 1.4rem">10</span>
+                        <span class="label-count" style="font-size: 1.4rem">{{auth()->user()->unreadNotifications->count();}}</span>
                     </a>
                 </li>
                 <!-- #END# Notifications -->

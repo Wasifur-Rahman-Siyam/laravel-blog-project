@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class UserDashboardController extends Controller
 {
     function index() {
-        return view('backend.user.dashboard.index');
+        $notificationCount = auth()->user()->unreadNotifications->count();
+        return view('backend.user.dashboard.index', compact('notificationCount'));
     }
 }

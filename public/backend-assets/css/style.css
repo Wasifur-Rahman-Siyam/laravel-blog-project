@@ -8215,3 +8215,6 @@ html.ie11 .bs-searchbox .form-control {
 .delete-from{
   display: inline;
 }
+.alert-notification{
+  background-color: #3294F1;
+}

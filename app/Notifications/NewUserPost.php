@@ -63,7 +63,8 @@ class NewUserPost extends Notification implements ShouldQueue
         return [
             'username'  => $this->post->user->name,
             'title'     => $this->post->title,
-            'id'        => $this->post->id
+            'id'        => $this->post->id,
+            'type'      => 'NewPost'
         ];
     }
 }

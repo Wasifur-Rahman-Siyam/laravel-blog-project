@@ -11,4 +11,12 @@ class NotificationsController extends Controller
         $notifications = auth()->user()->unreadNotifications;
         return view('backend.notifications.index',compact('notifications'));
     }
+
+    public function markasread($id){
+        if($id){
+            auth()->user()->unreadNotifications->where('id',$id)->markAsRead();
+        }
+        return back();
+    }
+
 }

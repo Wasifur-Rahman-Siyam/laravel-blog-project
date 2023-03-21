@@ -84,7 +84,6 @@ class UserPostController extends Controller
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
         $users = User::role('admin')->get();
-        // $users->notify(new NewUserPost($post));
         Notification::send($users,new NewUserPost($post));
         return redirect()->route('user.post.index')->with('msg', 'Post Added Successfully');
     }

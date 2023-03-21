@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class UserPostApproved extends Notification
+class UserPostApproved extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -31,7 +31,7 @@ class UserPostApproved extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
@@ -59,7 +59,10 @@ class UserPostApproved extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'username'  => $this->post->user->name,
+            'title'     => $this->post->title,
+            'id'        => $this->post->id,
+            'type'      => 'PostApproved'
         ];
     }
 }

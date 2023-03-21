@@ -36,6 +36,7 @@ Route::group(['as'=>'user.','prefix'=>'user','middleware'=>['auth:sanctum',confi
     Route::resource('post', UserPostController::class);
 
     Route::get('/notifications',[NotificationsController::class, 'show'])->name('notifications');
+    Route::get('/markasread/{id}',[NotificationsController::class, 'markasread'])->name('markasread');
 });
 
 /*
@@ -53,5 +54,6 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth:sanctum',con
     Route::get('pending/post',[PostController::class,'pending'])->name('post.pending');
     Route::put('/post/{id}/approve',[PostController::class,'approval'])->name('post.approve');
     Route::get('/notifications',[NotificationsController::class, 'show'])->name('notifications');
+    Route::get('/markasread/{id}',[NotificationsController::class, 'markasread'])->name('markasread');
 });
 
