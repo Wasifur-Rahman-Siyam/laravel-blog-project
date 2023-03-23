@@ -66,7 +66,7 @@
                     </h2>
                 </div>
                 <div class="body">
-                    <img src="{{asset('/').'images/posts/'.$post->image}}" alt="" class="img-responsive thumbnail">
+                    <img src="{{asset('/')}}images/posts/card/{{$post->image}}" alt="" class="img-responsive thumbnail">
                 </div>
             </div>
         </div>

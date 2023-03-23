@@ -10,9 +10,8 @@
             <span>Approved</span>
         </button>
     @else
-        <button type="button" class="btn btn-success pull-right" disabled>
-            <i class="material-icons">done</i>
-            <span>Approve</span>
+        <button type="button" class="btn btn-warning pull-right" disabled>
+            <span>painding</span>
         </button>
     @endif
     <br>
@@ -63,7 +62,7 @@
                     </h2>
                 </div>
                 <div class="body">
-                    <img src="{{asset('/').'images/posts/'.$post->image}}" alt="" class="img-responsive thumbnail">
+                    <img src="{{asset('/')}}images/posts/card/{{$post->image}}" alt="" class="img-responsive thumbnail">
                 </div>
             </div>
         </div>

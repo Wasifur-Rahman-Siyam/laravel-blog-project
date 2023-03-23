@@ -63,47 +63,25 @@
               <div class="col-sm-9">
                 <h3>Recent Articles</h3>
                 <!--Article lists -->
+                @foreach ($recentPosts as $recentPost)                  
                 <div class="list-group mt-3">
                   <a href="#" class="list-group-item list-group-item-action">
                     <div class="recent-card d-flex gap-3">
                       <div class="recent-card-img">
-                        <img src="{{asset('/')}}frontend-assets/img/2.jpg" alt="">
+                        <img src="{{asset('/')}}images/posts/card/{{$recentPost->image}}" alt="">
                       </div>
                       <div class="recent-card-content">
                         <div class="d-flex w-100 justify-content-between">
-                          <h5 class="mb-1">Blog Post 1</h5>
-                          <small class="text-muted">yesterday</small>
+                          <h5 class="mb-1">{{$recentPost->title}}</h5>
+                          <small class="text-muted">{{$recentPost->created_at->toFormattedDateString()}}</small>
                         </div>
-                        <p class="mb-1">Lorem ipsum dolor sit amet.</p>
-                        <small class="text-muted"
-                          >Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                          Consequatur optio id molestias, labore nostrum corporis.</small
-                        >
+                        <p class="mb-1">{{$recentPost->user->name}}</p>
+                        <small class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit.</small>
                       </div>
                     </div>
                   </a>
                 </div>
-                <div class="list-group mt-3">
-                  <a href="#" class="list-group-item list-group-item-action">
-                    <div class="recent-card d-flex gap-3">
-                      <div class="recent-card-img">
-                        <img src="{{asset('/')}}frontend-assets/img/2.jpg" alt="">
-                      </div>
-                      <div class="recent-card-content">
-                        <div class="d-flex w-100 justify-content-between">
-                          <h5 class="mb-1">Blog Post 1</h5>
-                          <small class="text-muted">yesterday</small>
-                        </div>
-                        <p class="mb-1">Lorem ipsum dolor sit amet.</p>
-                        <small class="text-muted"
-                          >Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                          Consequatur optio id molestias, labore nostrum corporis.</small
-                        >
-                      </div>
-                    </div>
-                   
-                  </a>
-                </div>
+                @endforeach
               </div>
       
               <!-- side bar -->

@@ -72,18 +72,23 @@ class PostController extends Controller
         if($image){
             $extension = $image->getClientOriginalExtension();
             $fileName = $post->slug.'-'.$post->id.'.'.$extension;
-            if (!file_exists('images/posts/')) {
-                mkdir('images/posts/', 666, true);
+            if (!file_exists('images/posts/banner/')) {
+                mkdir('images/posts/banner/', 666, true);
             }
-            $path = 'images/posts/' . $fileName;
+            $path = 'images/posts/banner/' . $fileName;
             Image::make($image)->resize(1600,1066)->save($path);
+            if (!file_exists('images/posts/card/')) {
+                mkdir('images/posts/card/', 666, true);
+            }
+            $path = 'images/posts/card/' . $fileName;
+            Image::make($image)->resize(353,253)->save($path);
             $post->image = $fileName;
             $post->save();
         }
 
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
-        return redirect()->back()->with('msg', 'Post Added Successfully');
+        return redirect()->route('admin.post.index')->with('msg', 'Post Added Successfully');
     }
 
     /**
@@ -143,22 +148,33 @@ class PostController extends Controller
             $extension = $image->getClientOriginalExtension();
             $fileName = $post->slug.'-'.$post->id.'.'.$extension;
 
-            $deleteImage = 'images/posts/'.$post->image;
+            $deleteImage = 'images/posts/banner/'.$post->image;
             if(File::exists($deleteImage)){
                File::delete($deleteImage);
             }
-            if (!file_exists('images/posts')) {
-                mkdir('images/posts/', 666, true);
+            if (!file_exists('images/posts/banner/')) {
+                mkdir('images/posts/banner/', 666, true);
             }
-            $path = 'images/posts/' . $fileName;
+            $path = 'images/posts/banner/' . $fileName;
             Image::make($image)->resize(1600,966)->save($path);
+
+            $deleteImage = 'images/posts/card/'.$post->image;
+            if(File::exists($deleteImage)){
+               File::delete($deleteImage);
+            }
+            if (!file_exists('images/posts/card/')) {
+                mkdir('images/posts/card/', 666, true);
+            }
+            $path = 'images/posts/card/' . $fileName;
+            Image::make($image)->resize(353,253)->save($path);
+
             $post->image = $fileName;
             $post->save();
         }
 
         $post->categories()->sync($request->categories);
         $post->tags()->sync($request->tags);
-        return redirect()->back()->with('msg', 'Post Edited Successfully');
+        return redirect()->route('admin.post.index')->with('msg', 'Post Edited Successfully');
     }
 
 
@@ -184,10 +200,14 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $deleteImage = 'images/posts/'.$post->image;
-            if(File::exists($deleteImage)){
-               File::delete($deleteImage);
-            }
+        $deleteImage1 = 'images/posts/banner/'.$post->image;
+        $deleteImage2 = 'images/posts/card/'.$post->image;
+        if(File::exists($deleteImage1)){
+            File::delete($deleteImage1);
+        }
+        if(File::exists($deleteImage2)){
+            File::delete($deleteImage2);
+        }
         $post->categories()->detach();
         $post->tags()->detach();
         $post->delete();

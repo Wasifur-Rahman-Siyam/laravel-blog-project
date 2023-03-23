@@ -10,21 +10,18 @@
         <h3>Blog Categories</h3>
       </div>
       <div class="row">
-
-        <div class="col-lg-4">
-          <div class="card mt-3">
-            <img src="{{asset('/')}}frontend-assets/img/1.jpg" class="card-img-top" alt="" />
-            <div class="card-body">
-              <a href="blogs.html" class="text-decoration-none text-black">
-                <h4 class="card-title">Blog Post 1</h4>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias,
-                    quisquam ratione? Ea natus magni omnis?....
-                </p>
-              </a>
+          @foreach ($categories as $category)
+          <div class="col-lg-4">
+            <div class="card mt-3">
+              <img src="{{asset('/')}}images/categories/card/{{$category->image}}" class="card-img-top" alt="" />
+              <div class="card-body">
+                <a href="blogs.html" class="text-decoration-none text-black">
+                  <h4 class="card-title">{{$category->name}}</h4>
+                </a>
+              </div>
             </div>
           </div>
-        </div>
+          @endforeach
       </div>
     </div>
   </main>
