@@ -48,7 +48,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="profile-icon">
-                  <img src="{{asset('/')}}frontend-assets/img/IMG_1043.JPG" alt="">
+                  <img src="{{asset('/'.Auth::user()->image)}}" alt="">
                 </span>
               </a>
               <ul class="dropdown-menu">

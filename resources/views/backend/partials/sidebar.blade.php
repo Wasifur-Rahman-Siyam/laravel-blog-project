@@ -74,8 +74,13 @@
                 </a>
             </li>
             @endif
-
             <li class="header">System</li>
+            <li class="{{Request::is('user/post*') ? 'active': ''}}">
+                <a href="{{route('admin.profile.settings')}}">
+                    <i class="material-icons">settings</i>
+                    <span>Profile</span>
+                </a>
+            </li>
             <li>
                 <a href="#" class="dropdown-item" onclick="logOutFrom()">
                     <i class="material-icons">input</i>
