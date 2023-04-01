@@ -2,7 +2,7 @@
     <!-- User Info -->
     <div class="user-info">
         <div class="image">
-            <img src="{{asset('/')}}backend-assets/images/user.png" width="48" height="48" alt="User" />
+            <img src="{{asset('/'.Auth::user()->image)}}" width="48" height="48" alt="User" />
         </div>
         <div class="info-container">
             <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Auth::user()->name}}</div>
@@ -10,7 +10,7 @@
             <div class="btn-group user-helper-dropdown">
                 <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                 <ul class="dropdown-menu pull-right">
-                    <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                    <li><a href="{{(auth()->user()->hasRole('admin')) ? route('admin.profile.settings') : route('user.profile.settings')}}"><i class="material-icons">person</i>Profile</a></li>
                     <li role="separator" class="divider"></li>
                     <li>
                         <a href="#" class="dropdown-item" onclick="logOutFrom()"><i class="material-icons">input</i>Log Out</a>
@@ -59,6 +59,22 @@
                     <span>Pending Posts</span>
                 </a>
             </li>
+            <li class="header">System</li>
+            <li class="{{Request::is('admin/settings*') ? 'active': ''}}">
+                <a href="{{route('admin.profile.settings')}}">
+                    <i class="material-icons">settings</i>
+                    <span>Profile Settings</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="dropdown-item" onclick="logOutFrom()">
+                    <i class="material-icons">input</i>
+                    <span>Log Out</span>
+                </a>
+                <form action="{{route('logout')}}" method="POST" id="logout">
+                    @csrf
+                </form>
+            </li>
             @endif
             @if (auth()->user()->hasRole('user'))
             <li class="{{Request::is('user/dashboard') ? 'active': ''}}"">
@@ -73,12 +89,11 @@
                     <span>Posts</span>
                 </a>
             </li>
-            @endif
             <li class="header">System</li>
-            <li class="{{Request::is('user/post*') ? 'active': ''}}">
-                <a href="{{route('admin.profile.settings')}}">
+            <li class="{{Request::is('user/settings*') ? 'active': ''}}">
+                <a href="{{route('user.profile.settings')}}">
                     <i class="material-icons">settings</i>
-                    <span>Profile</span>
+                    <span>Profile Settings</span>
                 </a>
             </li>
             <li>
@@ -90,6 +105,7 @@
                     @csrf
                 </form>
             </li>
+            @endif
         </ul>
     </div>
     <!-- #Menu -->

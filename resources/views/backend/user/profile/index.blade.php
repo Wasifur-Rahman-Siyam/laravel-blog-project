@@ -30,7 +30,7 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane fade" id="profile_with_icon_title">
-                            <form class="form-horizontal" action="{{route('admin.profile.update')}}" method="POST" enctype="multipart/form-data">
+                            <form class="form-horizontal" action="{{route('user.profile.update')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="row clearfix">
@@ -109,7 +109,7 @@
                             </form>
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="password_with_icon_title">
-                            <form class="form-horizontal" action="{{route('admin.password.update')}}" method="POST">
+                            <form class="form-horizontal" action="{{route('user.password.update')}}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <div class="row clearfix">

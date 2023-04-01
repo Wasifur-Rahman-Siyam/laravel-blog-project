@@ -18,7 +18,6 @@
               <h3>Featured Post</h3>
             </div>
             <div class="row">
-      
               <div class="col-lg-4">
                 <div class="card mt-3">
                   <img src="{{asset('/')}}frontend-assets/img/1.jpg" class="card-img-top" alt="" />

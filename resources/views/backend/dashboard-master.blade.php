@@ -1,5 +1,5 @@
 
-@include('backend.includs.dashboard-header')
+@include('backend.partials.dashboard-header')
 <body class="theme-black">
     <!-- Page Loader -->
 
@@ -32,4 +32,4 @@
 
     </section>
 
-    @include('backend.includs.dashboard-footer')
+    @include('backend.partials.dashboard-footer')

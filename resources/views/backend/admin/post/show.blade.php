@@ -8,7 +8,7 @@
             <i class="material-icons">done</i>
             <span>Approve</span>
         </button>
-        <form action="{{ route('admin.post.approve',$post->id)}}" method="POST" id="approval-from">
+        <form action="{{route('admin.post.approve',$post->id)}}" method="POST" id="approval-from">
             @csrf
             @method('PUT')
         </form>

@@ -1,5 +1,5 @@
 
-@include('backend.includs.datatable-header')
+@include('backend.partials.datatable-header')
 <body class="theme-black">
     <!-- Page Loader -->
 
@@ -32,4 +32,4 @@
 
     </section>
 
-    @include('backend.includs.datatable-footer')
+    @include('backend.partials.datatable-footer')

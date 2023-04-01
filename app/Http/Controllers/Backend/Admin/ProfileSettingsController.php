@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\File; 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileSettingsController extends Controller
@@ -40,6 +41,31 @@ class ProfileSettingsController extends Controller
             $user->save();
         }
         return redirect()->back()->with('msg', 'User Updated Successfully');
+    }
+
+    function updatePassword(Request $request) {
+
+        $request->validate([
+            'old_password'      => 'required',
+            'password'          => 'required|confirmed',
+        ]);
+        $hashedPassword = Auth::user()->password;
+        if(Hash::check($request->old_password, $hashedPassword)){
+            if(!Hash::check($request->password, $hashedPassword)){
+                $user = User::Find(Auth::id());
+                $user->password  = Hash::make($request->password);
+                $user->save();
+                return redirect()->back()->with('msg','password updated successfully');
+                Auth::logout();
+                return redirect()->back();
+            }
+            else{
+                return redirect()->back()->with('msg','New password cannot be same as old password');
+            }
+        }
+        else{
+            return redirect()->back()->with('msg','Current password not matched with old');
+        }
     }
 
 }

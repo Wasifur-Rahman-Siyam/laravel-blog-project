@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\Admin\TagController;
 use App\Http\Controllers\Backend\NotificationsController;
 use App\Http\Controllers\Backend\User\UserDashboardController;
 use GuzzleHttp\Middleware;
+use Laravel\Jetstream\Http\Controllers\Inertia\UserProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,11 @@ Route::group(['as'=>'user.','prefix'=>'user','middleware'=>['auth:sanctum',confi
     Route::get('/dashboard', [UserDashboardController::class,'index'])->name('dashboard');
     Route::resource('post', UserPostController::class);
 
+    // profile settings
+    Route::get('/settings',[UserController::class,'index'])->name('profile.settings');
+    Route::put('/profile-update',[UserController::class,'updateProfile'])->name('profile.update');
+    Route::put('/password-update',[UserController::class,'updatePassword'])->name('password.update');
+
     // notification routes
     Route::get('/notifications',[NotificationsController::class, 'show'])->name('notifications');
     Route::get('/markasread/{id}',[NotificationsController::class, 'markasread'])->name('markasread');
@@ -56,7 +62,7 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth:sanctum',con
     // profile settings
     Route::get('/settings',[ProfileSettingsController::class,'index'])->name('profile.settings');
     Route::put('/profile-update',[ProfileSettingsController::class,'updateProfile'])->name('profile.update');
-    
+    Route::put('/password-update',[ProfileSettingsController::class,'updatePassword'])->name('password.update');    
     // User post approval routes
     Route::get('pending/post',[PostController::class,'pending'])->name('post.pending');
     Route::put('/post/{id}/approve',[PostController::class,'approval'])->name('post.approve');
