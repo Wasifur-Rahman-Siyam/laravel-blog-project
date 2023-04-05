@@ -11,6 +11,7 @@ Use App\Http\Controllers\Backend\User\UserPostController;
 use App\Http\Controllers\Backend\Admin\TagController;
 use App\Http\Controllers\Backend\NotificationsController;
 use App\Http\Controllers\Backend\User\UserDashboardController;
+use App\Http\Controllers\LikeController;
 use GuzzleHttp\Middleware;
 use Laravel\Jetstream\Http\Controllers\Inertia\UserProfileController;
 
@@ -72,3 +73,15 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth:sanctum',con
     Route::get('/markasread/{id}',[NotificationsController::class, 'markasread'])->name('markasread');
 });
 
+
+/*
+|--------------------------------------------------------------------------
+| Admin & User Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::group(['middleware'=>['auth:sanctum',config('jetstream.auth_session'),'verified']],function () {
+    
+    //Like routes
+    Route::post('/like/{post}/add',[LikeController::class, 'add'])->name('post.like');
+});

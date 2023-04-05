@@ -19,4 +19,8 @@ class post extends Model
     public function tags(){
         return $this->belongsToMany('App\Models\tag')->withTimestamps();
     }
+
+    public function like_to_users(){
+        return $this->belongsToMany('App\Models\user')->withTimestamps();
+    }
 }

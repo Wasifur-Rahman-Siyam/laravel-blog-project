@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row">
               <div class="banner-img">
-                <img src="{{asset('/')}}frontend-assets/img/banner.jpg" alt="">
+                <img src="{{asset('/')}}frontend-assets/img/banner.png" alt="">
               </div>
             </div>
           </div>
@@ -19,12 +19,13 @@
             </div>
             <div class="row">
               <div class="col-lg-4">
+                @foreach ($recentPosts as $recentPost)
                 <div class="card mt-3">
                   <img src="{{asset('/')}}frontend-assets/img/1.jpg" class="card-img-top" alt="" />
                   <div class="card-body">
-                    <a href="#" class="text-decoration-none text-black">
+                    {{-- <a href="#" class="text-decoration-none text-black"> --}}
                       <h6>Category</h6>
-                      <h4 class="card-title">Blog Post 1</h4>
+                      <h4 class="card-title">{{$recentPost->title}}</h4>
                       <p>5/5/2023</p>
                       <p>
                           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias,
@@ -39,9 +40,16 @@
                         </div>
                         <div class="d-flex gap-3">
                           <div class="like">
-                            <!-- <i class="fa-regular fa-thumbs-up"></i> -->
-                            <i class="fa-solid fa-thumbs-up"></i>
-                             2
+                            @guest
+                            <i class="fa-regular fa-thumbs-up"></i>
+                              {{$recentPost->like_to_users()->count()}}
+                            @else  
+                              <a href="javascript:void(0);" style="color:black">
+                                <i class="fa-regular fa-thumbs-up"></i>
+                                {{$recentPost->like_to_users()->count()}}
+                              </a>
+                              {{-- <i class="fa-solid fa-thumbs-up"></i> --}}
+                            @endguest
                           </div>
                           <div class="comment">
                             <i class="fa-regular fa-comment"></i>
@@ -49,9 +57,10 @@
                           </div>
                         </div>
                       </div>
-                    </a>
+                    {{-- </a> --}}
                   </div>
                 </div>
+                @endforeach
               </div>
             </div>
           </div>
