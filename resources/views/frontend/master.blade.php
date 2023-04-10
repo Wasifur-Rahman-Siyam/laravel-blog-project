@@ -30,6 +30,11 @@
             <li class="nav-item">
               <a class="nav-link" href="{{route('categories')}}">Categories</a>
             </li>
+            @if (Auth::check())
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('post.liked')}}">Liked Posts</a>
+            </li>
+            @endif
           </ul>
 
           <ul class="navbar-nav ms-auto  mb-2 mb-lg-0">

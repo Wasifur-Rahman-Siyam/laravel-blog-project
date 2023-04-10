@@ -83,5 +83,6 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth:sanctum',con
 Route::group(['middleware'=>['auth:sanctum',config('jetstream.auth_session'),'verified']],function () {
     
     //Like routes
-    Route::post('/like/{post}/add',[LikeController::class, 'add'])->name('post.like');
+    Route::post('/like/{post_id}/add',[LikeController::class, 'like'])->name('post.like');
+    Route::get('/liked-post',[LikeController::class, 'index'])->name('post.liked');
 });

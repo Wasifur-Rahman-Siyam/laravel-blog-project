@@ -18,8 +18,8 @@
               <h3>Featured Post</h3>
             </div>
             <div class="row">
+              @foreach ($recentPosts as $recentPost)
               <div class="col-lg-4">
-                @foreach ($recentPosts as $recentPost)
                 <div class="card mt-3">
                   <img src="{{asset('/')}}frontend-assets/img/1.jpg" class="card-img-top" alt="" />
                   <div class="card-body">
@@ -34,7 +34,7 @@
                       <div class="d-flex align-items-center justify-content-between">
                         <div class="profile-info-container">
                           <span class="profile-icon">
-                            <img src="{{asset('/')}}frontend-assets/img/IMG_1043.JPG" alt="">
+                            <img src="{{asset('/')}}{{$recentPost->user->image}}" alt="">
                             User name
                           </span>
                         </div>
@@ -43,12 +43,14 @@
                             @guest
                             <i class="fa-regular fa-thumbs-up"></i>
                               {{$recentPost->like_to_users()->count()}}
-                            @else  
-                              <a href="javascript:void(0);" style="color:black">
-                                <i class="fa-regular fa-thumbs-up"></i>
+                            @else
+                              <a href="javascript:void(0);" onclick="document.getElementById('like-form-{{$recentPost->id}}').submit();" style="color:black">
+                                <i class="{{!Auth::user()->likedPosts()->where('post_id',$recentPost->id)->count() == 0 ? 'fa-solid':'fa-regular'}} fa-thumbs-up"></i>
                                 {{$recentPost->like_to_users()->count()}}
                               </a>
-                              {{-- <i class="fa-solid fa-thumbs-up"></i> --}}
+                              <form id='like-form-{{$recentPost->id}}' action="{{route('post.like',$recentPost->id)}}" method="POST" style="display: none">
+                                @csrf
+                              </form> 
                             @endguest
                           </div>
                           <div class="comment">
@@ -60,8 +62,8 @@
                     {{-- </a> --}}
                   </div>
                 </div>
-                @endforeach
               </div>
+              @endforeach
             </div>
           </div>
       
@@ -80,11 +82,11 @@
                       </div>
                       <div class="recent-card-content">
                         <div class="d-flex w-100 justify-content-between">
-                          <h5 class="mb-1">{{$recentPost->title}}</h5>
-                          <small class="text-muted">{{$recentPost->created_at->toFormattedDateString()}}</small>
+                          <h5 class="mb-1">{{Str::limit($recentPost->title,65)}}</h5>
                         </div>
                         <p class="mb-1">{{$recentPost->user->name}}</p>
-                        <small class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit.</small>
+                        <small class="text-muted">{{$recentPost->created_at->toFormattedDateString()}}</small>
+                        {!!Str::limit($recentPost->body,90)!!}
                       </div>
                     </div>
                   </a>

@@ -24,7 +24,7 @@ class UserPostController extends Controller
      */
     public function index()
     {
-        $posts = Auth::User()->posts()->latest()->get();
+        $posts = Post::latest()->where('user_id', Auth::user()->id)->get();
         return view('backend.user.post.index',compact('posts'));
     }
 
@@ -49,7 +49,7 @@ class UserPostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'             => 'required|max:60|unique:posts',
+            'title'             => 'required|max:100|unique:posts',
             'image'             => 'required|image|mimes:jpg,png,jpeg,gif,svg',
             'categories'        => 'required',
             'tags'              => 'required',
@@ -136,7 +136,7 @@ class UserPostController extends Controller
             return redirect()->back()->with('msg', 'You are not authorized to access this post Post');
         }
         $request->validate([
-            'title'             => 'required|max:60|unique:posts,title,'.$post->id,
+            'title'             => 'required|max:100|unique:posts,title,'.$post->id,
             'image'             => 'image|mimes:jpg,png,jpeg,gif,svg',
             'categories'        => 'required',
             'tags'              => 'required',
