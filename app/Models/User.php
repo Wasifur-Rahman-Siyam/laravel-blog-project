@@ -64,11 +64,15 @@ class User extends Authenticatable
     ];
 
 
-    // public function posts(){
-    //     return $this->belongsToMany('App\Models\post')->withTimestamps();
-    // }
+    public function posts(){
+        return $this->belongsToMany('App\Models\post')->withTimestamps();
+    }
 
     public function likedPosts(){
-        return $this->belongsToMany('App\Models\post')->withTimestamps();
+        return $this->belongsToMany('App\Models\Post')->withTimestamps();
+    }
+
+    public function comments(){
+        return $this->hasMany('App\Models\Comment');
     }
 }

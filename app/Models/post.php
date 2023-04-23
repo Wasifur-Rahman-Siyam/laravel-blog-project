@@ -10,17 +10,22 @@ class post extends Model
     use HasFactory;
 
     public function user(){
-        return $this->belongsTo('App\Models\user');
+        return $this->belongsTo('App\Models\User');
     }
 
     public function categories(){
-        return $this->belongsToMany('App\Models\category')->withTimestamps();
+        return $this->belongsToMany('App\Models\Category')->withTimestamps();
     }
     public function tags(){
-        return $this->belongsToMany('App\Models\tag')->withTimestamps();
+        return $this->belongsToMany('App\Models\Tag')->withTimestamps();
     }
 
     public function like_to_users(){
-        return $this->belongsToMany('App\Models\user')->withTimestamps();
+        return $this->belongsToMany('App\Models\User')->withTimestamps();
     }
+
+    public function comments(){
+        return $this->hasMany('App\Models\Comment');
+    }
+    
 }

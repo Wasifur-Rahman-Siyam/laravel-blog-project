@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class LikeController extends Controller
 {
     public function index(){
-        $posts = Auth::user()->likedPosts()->get();
+        $posts = Auth::user()->likedPosts()->paginate(10);
         return view('frontend.liked-posts.index', compact('posts'));
     }
     public function like($post_id){

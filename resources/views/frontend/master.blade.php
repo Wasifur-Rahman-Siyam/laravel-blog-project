@@ -46,10 +46,7 @@
             <li class="nav-item">
               <a class="nav-link text-white" href="{{route('register')}}">Register</a>
             </li>
-            
             @else
-
-
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="profile-icon">

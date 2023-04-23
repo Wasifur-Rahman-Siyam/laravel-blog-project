@@ -76,7 +76,7 @@ class UserPostController extends Controller
                 mkdir('images/posts/banner/', 666, true);
             }
             $path = 'images/posts/banner/' . $fileName;
-            Image::make($image)->resize(1600,1066)->save($path);
+            Image::make($image)->resize(1100,550)->save($path);
             if (!file_exists('images/posts/card/')) {
                 mkdir('images/posts/card/', 666, true);
             }
@@ -167,7 +167,7 @@ class UserPostController extends Controller
                 mkdir('images/posts/banner/', 666, true);
             }
             $path = 'images/posts/banner/' . $fileName;
-            Image::make($image)->resize(1600,966)->save($path);
+            Image::make($image)->resize(1100,550)->save($path);
 
             $deleteImage = 'images/posts/card/'.$post->image;
             if(File::exists($deleteImage)){

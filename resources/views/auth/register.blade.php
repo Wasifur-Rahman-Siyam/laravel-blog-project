@@ -15,7 +15,7 @@
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="username" value="{{ __('User name') }}" />
+                <x-jet-label for="username" value="{{ __('User name') }} (User name cannot be changed.)" />
                 <x-jet-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required />
             </div>
 

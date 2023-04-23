@@ -20,12 +20,10 @@ class UserController extends Controller
         $user = User::findOrFail(Auth::id());
         $request->validate([
             'name'      => 'required|string|max:255|min:2',
-            'username'  => 'required|string|alpha_num|max:20|unique:users,username,'.$user->id,
             'email'     => 'required|email|unique:users,email,'.$user->id,
             'image'     => 'image| mimes:jpg,png,jpeg,svg'
         ]);
         $user->name = $request->name;
-        $user->username = $request->username;
         $user->email = $request->email;
         $user->save();
         if($request->image){

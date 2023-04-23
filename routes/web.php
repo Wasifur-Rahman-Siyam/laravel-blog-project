@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\Admin\DashboardController;
 use App\Http\Controllers\Backend\Admin\PostController;
 use App\Http\Controllers\Backend\Admin\ProfileSettingsController;
 Use App\Http\Controllers\Backend\User\UserPostController;
+Use App\Http\Controllers\Backend\CommentController;
 use App\Http\Controllers\Backend\Admin\TagController;
 use App\Http\Controllers\Backend\NotificationsController;
 use App\Http\Controllers\Backend\User\UserDashboardController;
@@ -23,6 +24,7 @@ use Laravel\Jetstream\Http\Controllers\Inertia\UserProfileController;
 
 Route::get('/',[HomeController::class, 'index'])->name('home');
 Route::get('/categories',[HomeController::class, 'categories'])->name('categories');
+Route::get('/post/{slug}',[HomeController::class, 'post'])->name('post.details');
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
     Route::get('/dashboard',[HomeController::class,'redirectUser'])->name('dashboard');
@@ -85,4 +87,7 @@ Route::group(['middleware'=>['auth:sanctum',config('jetstream.auth_session'),'ve
     //Like routes
     Route::post('/like/{post_id}/add',[LikeController::class, 'like'])->name('post.like');
     Route::get('/liked-post',[LikeController::class, 'index'])->name('post.liked');
+
+    // Comments routes
+    Route::post('/comments/{post_id}',[CommentController::class, 'store'])->name('comment.store');
 });

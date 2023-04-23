@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\post;
+use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\New_;
 
@@ -29,5 +30,11 @@ class HomeController extends Controller
     function categories () {
         $categories = Category::all();
         return view('frontend.categories.index',compact('categories'));
+    }
+
+    function post($slug){
+        $post = Post::where('slug', $slug)->first();
+        // $randomPosts = Post::all()->random(3);
+        return view('frontend.post.index', compact('post'));
     }
 }

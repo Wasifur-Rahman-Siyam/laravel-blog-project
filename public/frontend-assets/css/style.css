@@ -102,3 +102,15 @@ a{
     text-decoration: none;
     color: black;
 }
+
+.btn-outline-dark:hover a{
+    color:#fff;
+}
+
+p{
+    margin-bottom: 0;
+}
+
+textarea {
+    resize: none;
+  }

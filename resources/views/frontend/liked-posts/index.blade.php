@@ -14,9 +14,11 @@
           <div class="list-group-item list-group-item-action">
             <div class="recent-card d-flex gap-3">
               <div class="recent-card-img">
-                <img src="{{asset('/')}}images/posts/card/{{$post->image}}" alt="">
+                <a href="{{route('post.details',$post->slug)}}">
+                  <img src="{{asset('/')}}images/posts/card/{{$post->image}}" alt="">
+                </a>
               </div>
-              <a href="#">
+              <a href="{{route('post.details',$post->slug)}}">
                 <div class="recent-card-content">
                   <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">{{$post->title}}</h5>
@@ -35,6 +37,9 @@
           </div>
         </div>
       @endforeach
+      <div class="mt-4 d-flex justify-content-center">
+        {{$posts->links()}}
+      </div>
     </div>
   </div>
 </main>

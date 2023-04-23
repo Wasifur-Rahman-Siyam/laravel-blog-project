@@ -10,6 +10,6 @@ class Category extends Model
     use HasFactory;
 
     public function post(){
-        return $this->belongsToMany('App\Models\post')->withTimestamps();
+        return $this->belongsToMany('App\Models\Post')->withTimestamps();
     }
 }

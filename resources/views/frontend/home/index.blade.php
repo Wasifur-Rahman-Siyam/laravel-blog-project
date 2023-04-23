@@ -75,7 +75,7 @@
                 <!--Article lists -->
                 @foreach ($recentPosts as $recentPost)                  
                 <div class="list-group mt-3">
-                  <a href="#" class="list-group-item list-group-item-action">
+                  <a href="{{route('post.details',$recentPost->slug)}}" class="list-group-item list-group-item-action">
                     <div class="recent-card d-flex gap-3">
                       <div class="recent-card-img">
                         <img src="{{asset('/')}}images/posts/card/{{$recentPost->image}}" alt="">
@@ -84,7 +84,7 @@
                         <div class="d-flex w-100 justify-content-between">
                           <h5 class="mb-1">{{Str::limit($recentPost->title,65)}}</h5>
                         </div>
-                        <p class="mb-1">{{$recentPost->user->name}}</p>
+                        <p>{{$recentPost->user->name}}</p>
                         <small class="text-muted">{{$recentPost->created_at->toFormattedDateString()}}</small>
                         {!!Str::limit($recentPost->body,90)!!}
                       </div>
