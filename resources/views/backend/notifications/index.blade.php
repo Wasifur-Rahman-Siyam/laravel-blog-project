@@ -5,7 +5,7 @@
     <a href="{{(auth()->user()->hasRole('admin')) ? route('admin.dashboard') : route('user.dashboard')}}" class="btn btn-danger waves-effect">BACK</a>
     @foreach ($notifications as $notification)
         @if ($notification->data['type'] == 'NewPost') 
-        <div class="notification-card" role="alert">
+        <div class="custom-card" role="alert">
             <div>
                 Posted by {{$notification->data['username']}} Need to approve : {{Str::limit($notification->data['title'],100)}}...  
             </div>
@@ -14,7 +14,7 @@
             </div>
         </div>
         @elseif ($notification->data['type'] == 'PostApproved')
-        <div class="notification-card" role="alert">
+        <div class="custom-card" role="alert">
             <div>
                 Your Post has been successfully approved : {{Str::limit($notification->data['title'],100)}}...  
             </div>
@@ -23,7 +23,7 @@
             </div>
         </div>
         @elseif ($notification->data['type'] == 'like')
-        <div class="notification-card" role="alert">
+        <div class="custom-card" role="alert">
             <div>
                 {{$notification->data['username']}} Liked your post : {{Str::limit($notification->data['title'],100)}}...  
             </div>

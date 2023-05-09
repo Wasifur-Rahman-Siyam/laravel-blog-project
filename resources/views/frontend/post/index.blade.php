@@ -104,7 +104,15 @@
                           <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                         </button>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Delete</a></li>
+                          <li>
+                            <a class="dropdown-item" href="javascript:void(0);" onclick="document.getElementById('delete-form').submit();">
+                              delete
+                            </a>
+                          </li>
+                        <form action="{{(auth()->user()->hasRole('admin')) ? route('admin.comment.destroy',$comment->id) : route('user.comment.destroy',$comment->id)}}" method="POST" class="delete-from" id="delete-form" style="display: none">
+                            @csrf
+                            @method('DELETE')
+                        </form> 
                           {{-- <li><a class="dropdown-item" href="#">Edit</a></li> --}}
                         </ul>
                       </div>

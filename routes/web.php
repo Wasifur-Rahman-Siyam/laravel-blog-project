@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\Admin\CategoryController;
+use App\Http\Controllers\Backend\Admin\CommentSettingsController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\User\UserController;
@@ -11,6 +12,7 @@ Use App\Http\Controllers\Backend\User\UserPostController;
 Use App\Http\Controllers\Backend\CommentController;
 use App\Http\Controllers\Backend\Admin\TagController;
 use App\Http\Controllers\Backend\NotificationsController;
+use App\Http\Controllers\Backend\User\UserCommentSettingsController;
 use App\Http\Controllers\Backend\User\UserDashboardController;
 use App\Http\Controllers\LikeController;
 use GuzzleHttp\Middleware;
@@ -45,6 +47,10 @@ Route::group(['as'=>'user.','prefix'=>'user','middleware'=>['auth:sanctum',confi
     Route::put('/profile-update',[UserController::class,'updateProfile'])->name('profile.update');
     Route::put('/password-update',[UserController::class,'updatePassword'])->name('password.update');
 
+    // Comment settings
+    Route::get('/comments/{post_id}',[UserCommentSettingsController::class,'index'])->name('comments.index');
+    Route::delete('/comments/{comment_id}',[UserCommentSettingsController::class,'destroy'])->name('comment.destroy');
+
     // notification routes
     Route::get('/notifications',[NotificationsController::class, 'show'])->name('notifications');
     Route::get('/markasread/{id}',[NotificationsController::class, 'markasread'])->name('markasread');
@@ -66,6 +72,11 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth:sanctum',con
     Route::get('/settings',[ProfileSettingsController::class,'index'])->name('profile.settings');
     Route::put('/profile-update',[ProfileSettingsController::class,'updateProfile'])->name('profile.update');
     Route::put('/password-update',[ProfileSettingsController::class,'updatePassword'])->name('password.update');    
+    
+    // Comment settings
+    Route::get('/comments/{post_id}',[CommentSettingsController::class,'index'])->name('comments.index');
+    Route::delete('/comments/{comment_id}',[CommentSettingsController::class,'destroy'])->name('comment.destroy');
+
     // User post approval routes
     Route::get('pending/post',[PostController::class,'pending'])->name('post.pending');
     Route::put('/post/{id}/approve',[PostController::class,'approval'])->name('post.approve');

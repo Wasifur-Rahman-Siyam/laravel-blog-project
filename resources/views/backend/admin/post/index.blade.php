@@ -27,12 +27,10 @@
                                     <th>Sl No.</th>
                                     <th>Title</th>
                                     <th>Author</th>
-                                    <th>
-                                        <i class="material-icons" >visibility</i>
-                                    </th>
                                     <th>Is Approved</th>
                                     <th>Is Active</th>
                                     <th>Preview</th>
+                                    <th>Comments</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -41,12 +39,10 @@
                                     <th>Sl No.</th>
                                     <th>Title</th>
                                     <th>Author</th>
-                                    <th>
-                                        <i class="material-icons" >visibility</i>
-                                    </th>
                                     <th>Is Approved</th>
                                     <th>Is Active</th>
                                     <th>Preview</th>
+                                    <th>Comments</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -56,7 +52,6 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{Str::limit($post->title,10)}}</td>
                                     <td>{{$post->user->name}}</td>
-                                    <td>{{$post->view_count}}</td>
                                     <td>
                                         @if ($post->is_approved == true)
                                             <span class="badge bg-blue">Approved</span>
@@ -74,6 +69,11 @@
                                     <td>
                                         <a href="{{route('admin.post.show',$post->id)}}" class="btn btn-success">
                                             <i class="material-icons">visibility</i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('admin.comments.index',$post->id)}}" class="btn btn-success">
+                                            View
                                         </a>
                                     </td>
                                     <td>

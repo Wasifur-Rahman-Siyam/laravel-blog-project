@@ -8219,7 +8219,18 @@ html.ie11 .bs-searchbox .form-control {
   background-color: #3294F1;
 }
 
-.notification-card{
+/* .notification-card{
+  background-color: #fff;
+  border: 1px solid #000;
+  color: #000;
+  padding: 2rem;
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.6rem;
+} */
+
+.custom-card{
   background-color: #fff;
   border: 1px solid #000;
   color: #000;
