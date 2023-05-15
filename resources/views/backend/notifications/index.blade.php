@@ -32,6 +32,16 @@
                 <a class="btn btn-warning" href="{{(auth()->user()->hasRole('admin')) ? route('admin.markasread',$notification->id) : route('user.markasread',$notification->id)}}">Mark as Read</a>
             </div>
         </div>
+        @elseif ($notification->data['type'] == 'Comment')
+        <div class="custom-card" role="alert">
+            <div>
+                {{$notification->data['username']}} Commented on your post : {{Str::limit($notification->data['title'],100)}}...  
+            </div>
+            <div>
+                <a class="btn btn-primary" href="{{(auth()->user()->hasRole('admin')) ? route('admin.comments.index',$notification->data['id']) : route('user.comments.index',$notification->data['id'])}}">View Comments</a> 
+                <a class="btn btn-warning" href="{{(auth()->user()->hasRole('admin')) ? route('admin.markasread',$notification->id) : route('user.markasread',$notification->id)}}">Mark as Read</a>
+            </div>
+        </div>
         @endif
     @endforeach
 </div>

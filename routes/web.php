@@ -26,6 +26,7 @@ use Laravel\Jetstream\Http\Controllers\Inertia\UserProfileController;
 
 Route::get('/',[HomeController::class, 'index'])->name('home');
 Route::get('/categories',[HomeController::class, 'categories'])->name('categories');
+Route::get('/category/{slug}',[HomeController::class, 'postByCategory'])->name('category.posts');
 Route::get('/post/{slug}',[HomeController::class, 'post'])->name('post.details');
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {

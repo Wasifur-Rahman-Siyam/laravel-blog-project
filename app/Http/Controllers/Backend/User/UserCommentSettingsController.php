@@ -16,7 +16,7 @@ class UserCommentSettingsController extends Controller
             return redirect()->back()->with('msg', 'You are not authorized to access this post Post');
         }
         $comments = Comment::where('post_id', $post_id)->get();
-        return view('backend.user.post.comments',compact('comments'));
+        return view('backend.user.post.comments',compact('comments','post_id'));
     }
 
     public function destroy($comment_id){

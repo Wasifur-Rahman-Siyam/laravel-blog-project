@@ -27,6 +27,7 @@
                                     <th>Sl No.</th>
                                     <th>Title</th>
                                     <th>Author</th>
+                                    <th>Likes</th>
                                     <th>Is Approved</th>
                                     <th>Is Active</th>
                                     <th>Preview</th>
@@ -39,6 +40,7 @@
                                     <th>Sl No.</th>
                                     <th>Title</th>
                                     <th>Author</th>
+                                    <th>Likes</th>
                                     <th>Is Approved</th>
                                     <th>Is Active</th>
                                     <th>Preview</th>
@@ -52,6 +54,7 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{Str::limit($post->title,10)}}</td>
                                     <td>{{$post->user->name}}</td>
+                                    <td>{{$post->like_to_users()->count()}}</td>
                                     <td>
                                         @if ($post->is_approved == true)
                                             <span class="badge bg-blue">Approved</span>

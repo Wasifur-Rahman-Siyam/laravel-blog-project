@@ -3,6 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <a href="{{route('admin.post.index')}}" class="btn btn-danger waves-effect">BACK</a>
+    <a href="{{route('admin.post.show',$post_id)}}" class="btn btn-success pull-right">View post details</a>
     <div class="row clearfix">
         @foreach ($comments as $comment)
         <div class="custom-card" role="alert">
