@@ -18,14 +18,14 @@
               <h3>Featured Post</h3>
             </div>
             <div class="row">
-              @foreach ($randomPosts as $randomPost)
+              @foreach ($recentPosts as $recentPost)
               <div class="col-lg-4">
                 <div class="card mt-3">
                   <img src="{{asset('/')}}frontend-assets/img/1.jpg" class="card-img-top" alt="" />
                   <div class="card-body">
                     {{-- <a href="#" class="text-decoration-none text-black"> --}}
                       <h6>Category</h6>
-                      <h4 class="card-title">{{$randomPost->title}}</h4>
+                      <h4 class="card-title">{{$recentPost->title}}</h4>
                       <p>5/5/2023</p>
                       <p>
                           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias,
@@ -34,7 +34,7 @@
                       <div class="d-flex align-items-center justify-content-between">
                         <div class="profile-info-container">
                           <span class="profile-icon">
-                            <img src="{{asset('/')}}{{$randomPost->user->image}}" alt="">
+                            <img src="{{asset('/')}}{{$recentPost->user->image}}" alt="">
                             User name
                           </span>
                         </div>
@@ -44,11 +44,11 @@
                             <i class="fa-regular fa-thumbs-up"></i>
                               {{$recentPost->like_to_users()->count()}}
                             @else
-                              <a href="javascript:void(0);" onclick="document.getElementById('like-form-{{$randomPost->id}}').submit();" style="color:black">
-                                <i class="{{!Auth::user()->likedPosts()->where('post_id',$randomPost->id)->count() == 0 ? 'fa-solid':'fa-regular'}} fa-thumbs-up"></i>
-                                {{$randomPost->like_to_users()->count()}}
+                              <a href="javascript:void(0);" onclick="document.getElementById('like-form-{{$recentPost->id}}').submit();" style="color:black">
+                                <i class="{{!Auth::user()->likedPosts()->where('post_id',$recentPost->id)->count() == 0 ? 'fa-solid':'fa-regular'}} fa-thumbs-up"></i>
+                                {{$recentPost->like_to_users()->count()}}
                               </a>
-                              <form id='like-form-{{$randomPost->id}}' action="{{route('post.like',$randomPost->id)}}" method="POST" style="display: none">
+                              <form id='like-form-{{$recentPost->id}}' action="{{route('post.like',$recentPost->id)}}" method="POST" style="display: none">
                                 @csrf
                               </form> 
                             @endguest

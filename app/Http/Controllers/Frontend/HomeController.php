@@ -21,25 +21,20 @@ class HomeController extends Controller
     }
 
 
-    public function index() {
+    function index() {
         $categories = Category::all();
         $recentPosts = post::latest()->take(6)->where('status', true)->where('is_approved', true)->get();
-        $randomPosts = Post::all()->random(3);
-        return view('frontend.home.index',compact('categories','recentPosts', 'randomPosts'));
+        return view('frontend.home.index',compact('categories','recentPosts'));
     }
 
-    public function categories () {
+    function categories () {
         $categories = Category::all();
         return view('frontend.categories.index',compact('categories'));
     }
 
-    public function postByCategory($slug){
-        $category = Category::where('slug', $slug)->first();
-        return $category;
-    }
-
-    public function post($slug){
+    function post($slug){
         $post = Post::where('slug', $slug)->first();
+        // $randomPosts = Post::all()->random(3);
         return view('frontend.post.index', compact('post'));
     }
 }
