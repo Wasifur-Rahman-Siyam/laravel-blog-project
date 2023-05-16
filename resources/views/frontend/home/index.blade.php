@@ -18,48 +18,43 @@
               <h3>Featured Post</h3>
             </div>
             <div class="row">
-              @foreach ($recentPosts as $recentPost)
+              @foreach ($randomPosts as $randomPost)
               <div class="col-lg-4">
-                <div class="card mt-3">
-                  <img src="{{asset('/')}}frontend-assets/img/1.jpg" class="card-img-top" alt="" />
+                <div class="card mt-3 h-100">
+                  <img src="{{asset('/')}}images/posts/card/{{$randomPost->image}}" class="card-img-top" alt="" />
                   <div class="card-body">
-                    {{-- <a href="#" class="text-decoration-none text-black"> --}}
-                      <h6>Category</h6>
-                      <h4 class="card-title">{{$recentPost->title}}</h4>
-                      <p>5/5/2023</p>
-                      <p>
-                          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias,
-                          quisquam ratione? Ea natus magni omnis?....
-                      </p>
+                    <a href="{{route('post.details',$randomPost->slug)}}" class="text-decoration-none text-black">
+                      <h4 class="card-title">{{$randomPost->title}}</h4>
+                      <p>{{$randomPost->created_at->toFormattedDateString()}}</p>
                       <div class="d-flex align-items-center justify-content-between">
                         <div class="profile-info-container">
                           <span class="profile-icon">
-                            <img src="{{asset('/')}}{{$recentPost->user->image}}" alt="">
-                            User name
+                            <img src="{{asset('/')}}{{$randomPost->user->image}}" alt="">
+                            {{$randomPost->user->name}}
                           </span>
                         </div>
                         <div class="d-flex gap-3">
                           <div class="like">
                             @guest
                             <i class="fa-regular fa-thumbs-up"></i>
-                              {{$recentPost->like_to_users()->count()}}
+                              {{$randomPost->like_to_users()->count()}}
                             @else
-                              <a href="javascript:void(0);" onclick="document.getElementById('like-form-{{$recentPost->id}}').submit();" style="color:black">
-                                <i class="{{!Auth::user()->likedPosts()->where('post_id',$recentPost->id)->count() == 0 ? 'fa-solid':'fa-regular'}} fa-thumbs-up"></i>
-                                {{$recentPost->like_to_users()->count()}}
+                              <a href="javascript:void(0);" onclick="document.getElementById('like-form-{{$randomPost->id}}').submit();" style="color:black">
+                                <i class="{{!Auth::user()->likedPosts()->where('post_id',$randomPost->id)->count() == 0 ? 'fa-solid':'fa-regular'}} fa-thumbs-up"></i>
+                                {{$randomPost->like_to_users()->count()}}
                               </a>
-                              <form id='like-form-{{$recentPost->id}}' action="{{route('post.like',$recentPost->id)}}" method="POST" style="display: none">
+                              <form id='like-form-{{$randomPost->id}}' action="{{route('post.like',$randomPost->id)}}" method="POST" style="display: none">
                                 @csrf
                               </form> 
                             @endguest
                           </div>
                           <div class="comment">
                             <i class="fa-regular fa-comment"></i>
-                            1
+                            {{$randomPost->comments()->count()}}
                           </div>
                         </div>
                       </div>
-                    {{-- </a> --}}
+                    </a>
                   </div>
                 </div>
               </div>

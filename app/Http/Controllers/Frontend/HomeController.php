@@ -24,7 +24,14 @@ class HomeController extends Controller
     function index() {
         $categories = Category::all();
         $recentPosts = post::latest()->take(6)->where('status', true)->where('is_approved', true)->get();
-        return view('frontend.home.index',compact('categories','recentPosts'));
+        $posts = Post::all();
+        if($posts->count() > 0) {
+            $randomPosts = $posts->random(3);
+        } else {
+            // handle case where there are no posts available
+            $randomPosts = collect([]);
+        }
+        return view('frontend.home.index',compact('categories','recentPosts', 'randomPosts'));
     }
 
     function categories () {
