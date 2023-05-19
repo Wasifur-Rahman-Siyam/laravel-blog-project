@@ -178,12 +178,14 @@ class PostController extends Controller
     }
 
 
-    public function pending(){
+    public function pending()
+    {
         $posts = Post::where('is_approved', false)->get();
         return view('backend.admin.post.pending',compact('posts'));
     }
 
-    public function approval($id){
+    public function approval($id)
+    {
         $post = Post::Find($id);
         $post->is_approved = true;
         $post->save();

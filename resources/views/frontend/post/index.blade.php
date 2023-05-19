@@ -14,9 +14,9 @@
                   Categories:
                     @foreach ($post->categories as $category)
                     @if ($loop->last)
-                    <a href="">{{$category->name}}</a>
+                    <a href="{{route('category.posts',$category->slug)}}">{{$category->name}}</a>
                     @else
-                    <a href="">{{$category->name}}, </a>
+                    <a href="{{route('category.posts',$category->slug)}}">{{$category->name}}, </a>
                     @endif
                     @endforeach
                 </h6>
@@ -34,7 +34,7 @@
               {!!$post->body!!}
 
               @foreach ($post->tags as $tag)
-              <button type="button" class="btn btn-outline-dark me-3 mt-4"><a href="{{route('home')}}">{{$tag->name}}</a></button>
+              <button type="button" class="btn btn-outline-dark me-3 mt-4"><a href="{{route('tag.posts',$tag->slug)}}">{{$tag->name}}</a></button>
               @endforeach
               
   

@@ -14,7 +14,8 @@ use PhpParser\Node\Expr\New_;
 
 class CommentController extends Controller
 {
-    public function store(Request $request, $post_id){
+    public function store(Request $request, $post_id)
+    {
         $this->validate($request, [
             'comment' => 'required'
         ]);

@@ -43,7 +43,7 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$category->name}}</td>
-                                    <td>{{$category->post->count()}}</td>
+                                    <td>{{$category->posts->count()}}</td>
                                     <td >
                                         <a href="{{route('admin.category.edit',$category->id)}}" class="btn btn-primary">
                                             <i class="material-icons">edit</i>

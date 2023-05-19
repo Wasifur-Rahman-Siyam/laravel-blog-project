@@ -19,8 +19,8 @@
             </div>
             <div class="row">
               @foreach ($randomPosts as $randomPost)
-              <div class="col-lg-4">
-                <div class="card mt-3 h-100">
+              <div class="col-lg-4 my-3">
+                <div class="card h-100">
                   <img src="{{asset('/')}}images/posts/card/{{$randomPost->image}}" class="card-img-top" alt="" />
                   <div class="card-body">
                     <a href="{{route('post.details',$randomPost->slug)}}" class="text-decoration-none text-black">
@@ -35,18 +35,8 @@
                         </div>
                         <div class="d-flex gap-3">
                           <div class="like">
-                            @guest
                             <i class="fa-regular fa-thumbs-up"></i>
-                              {{$randomPost->like_to_users()->count()}}
-                            @else
-                              <a href="javascript:void(0);" onclick="document.getElementById('like-form-{{$randomPost->id}}').submit();" style="color:black">
-                                <i class="{{!Auth::user()->likedPosts()->where('post_id',$randomPost->id)->count() == 0 ? 'fa-solid':'fa-regular'}} fa-thumbs-up"></i>
-                                {{$randomPost->like_to_users()->count()}}
-                              </a>
-                              <form id='like-form-{{$randomPost->id}}' action="{{route('post.like',$randomPost->id)}}" method="POST" style="display: none">
-                                @csrf
-                              </form> 
-                            @endguest
+                            {{$randomPost->like_to_users()->count()}}
                           </div>
                           <div class="comment">
                             <i class="fa-regular fa-comment"></i>
@@ -93,9 +83,13 @@
               <div class="col-sm-3">
                 <h3 class="">Popular Categories</h3>
                 <div class="mt-3">
+                  @foreach ($topCategories as $topCategory) 
                   <ul class="list-group">
-                    <li class="list-group-item">An item</li>
+                    <a href="{{route('category.posts',$topCategory->slug)}}" class="text-decoration-none text-black">
+                      <li class="list-group-item">{{$topCategory->name}}</li>
+                    </a>
                   </ul>
+                  @endforeach
                 </div>
               </div>
             </div>

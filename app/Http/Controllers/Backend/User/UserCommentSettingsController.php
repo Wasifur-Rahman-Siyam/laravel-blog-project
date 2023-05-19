@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 
 class UserCommentSettingsController extends Controller
 {
-    public function index($post_id){
+    public function index($post_id)
+    {
         $post = post::Find($post_id);
         if($post->user_id != Auth::id()){
             return redirect()->back()->with('msg', 'You are not authorized to access this post Post');
@@ -19,7 +20,8 @@ class UserCommentSettingsController extends Controller
         return view('backend.user.post.comments',compact('comments','post_id'));
     }
 
-    public function destroy($comment_id){
+    public function destroy($comment_id)
+    {
         $comment = Comment::findOrFail($comment_id)->delete();
         return redirect()->back();
     }

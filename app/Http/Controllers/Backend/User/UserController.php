@@ -11,12 +11,13 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    function index() {
+    function index() 
+    {
         return view('backend.user.profile.index');
     }
 
-    function updateProfile(Request $request) {
-
+    function updateProfile(Request $request) 
+    {
         $user = User::findOrFail(Auth::id());
         $request->validate([
             'name'      => 'required|string|max:255|min:2',
@@ -41,8 +42,8 @@ class UserController extends Controller
         return redirect()->back()->with('msg', 'User Updated Successfully');
     }
 
-    function updatePassword(Request $request) {
-
+    function updatePassword(Request $request) 
+    {
         $request->validate([
             'old_password'      => 'required',
             'password'          => 'required|confirmed',

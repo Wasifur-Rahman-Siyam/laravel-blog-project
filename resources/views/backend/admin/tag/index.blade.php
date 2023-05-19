@@ -43,7 +43,7 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$tag->name}}</td>
-                                    <td>{{$tag->post->count()}}</td>
+                                    <td>{{$tag->posts->count()}}</td>
                                     <td >
                                         <a href="{{route('admin.tag.edit',$tag->id)}}" class="btn btn-primary">
                                             <i class="material-icons">edit</i>

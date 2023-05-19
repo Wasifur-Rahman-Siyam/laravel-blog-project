@@ -11,12 +11,13 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileSettingsController extends Controller
 {
-    function index() {
+    public function index() 
+    {
         return view('backend.admin.profile.index');
     }
 
-    function updateProfile(Request $request) {
-
+    public function updateProfile(Request $request) 
+    {
         $user = User::findOrFail(Auth::id());
         $request->validate([
             'name'      => 'required|string|max:255|min:2',
@@ -41,7 +42,8 @@ class ProfileSettingsController extends Controller
         return redirect()->back()->with('msg', 'User Updated Successfully');
     }
 
-    function updatePassword(Request $request) {
+    function updatePassword(Request $request) 
+    {
 
         $request->validate([
             'old_password'      => 'required',

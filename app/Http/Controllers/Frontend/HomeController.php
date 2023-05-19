@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\New_;
 
@@ -21,27 +22,49 @@ class HomeController extends Controller
     }
 
 
-    function index() {
+    public function index() 
+    {
         $categories = Category::all();
         $recentPosts = post::latest()->take(6)->where('status', true)->where('is_approved', true)->get();
-        $posts = Post::all();
+        $posts = Post::all()->where('status', true)->where('is_approved', true);
         if($posts->count() > 0) {
             $randomPosts = $posts->random(3);
         } else {
             // handle case where there are no posts available
             $randomPosts = collect([]);
         }
-        return view('frontend.home.index',compact('categories','recentPosts', 'randomPosts'));
+        $topCategories = Category::withCount('posts')
+        ->orderByDesc('posts_count')
+        ->take(10)
+        ->get();
+        return view('frontend.home.index',compact('categories','recentPosts', 'randomPosts','topCategories'));
     }
 
-    function categories () {
+    public function categories() 
+    {
         $categories = Category::all();
         return view('frontend.categories.index',compact('categories'));
     }
 
-    function post($slug){
+    public function postByCategory($slug) 
+    {
+        $category = Category::where('slug', $slug)->first();
+        $posts = $category->posts;
+        $bannerImage= $category->image;
+        return view('frontend.Posts.index',compact('posts','bannerImage'));
+    }
+
+    public function postByTag($slug) 
+    {
+        $tag = Tag::where('slug', $slug)->first();
+        $posts = $tag->posts;
+        $bannerImage= null;
+        return view('frontend.Posts.index',compact('posts','bannerImage'));
+    }
+
+    public function post($slug)
+    {
         $post = Post::where('slug', $slug)->first();
-        // $randomPosts = Post::all()->random(3);
         return view('frontend.post.index', compact('post'));
     }
 }

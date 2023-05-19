@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class UserDashboardController extends Controller
 {
-    function index() {
+    function index() 
+    {
         return view('backend.user.dashboard.index');
     }
 }
