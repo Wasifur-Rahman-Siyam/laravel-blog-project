@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class post extends Model
 {
@@ -33,4 +34,13 @@ class post extends Model
         return $this->hasMany('App\Models\Comment');
     }
     
+    public function scopeActive(Builder $query): void
+    {
+        $query->where('status', true);
+    }
+
+    public function scopeApproved(Builder $query): void
+    {
+        $query->where('is_approved', true);
+    }
 }

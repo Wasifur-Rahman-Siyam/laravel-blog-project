@@ -37,6 +37,13 @@
             @endif
           </ul>
 
+          <form class="d-flex m-auto" action="{{route('search')}}" method="GET">
+            @csrf
+            <input class="form-control me-2" type="search" name='search' placeholder="Search" aria-label="Search" style="width: 22rem">
+            <button class="btn btn-dark" type="submit"><i class="fa fa-search"></i></button>
+          </form>
+
+
           <ul class="navbar-nav ms-auto  mb-2 mb-lg-0">
 
             @if (!Auth::check())
@@ -79,7 +86,8 @@
     <footer class="w-100 bg-dark">
       <div class="container text-white py-4">
         <div class="row text-center">
-          <p class="mb-0">&copy; Designed by Md. Wasifur Rahman Siyam</p>
+          <p class="mb-0">&copy; {{ config('app.name') }} All Right Reserved.</p>
+          <p class="mb-0">Designe & Develop by Md. Wasifur Rahman Siyam</p>
         </div>
       </div>
     </footer>

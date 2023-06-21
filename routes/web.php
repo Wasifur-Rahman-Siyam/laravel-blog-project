@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\Admin\TagController;
 use App\Http\Controllers\Backend\NotificationsController;
 use App\Http\Controllers\Backend\User\UserCommentSettingsController;
 use App\Http\Controllers\Backend\User\UserDashboardController;
+use App\Http\Controllers\Frontend\SearchController;
 use App\Http\Controllers\LikeController;
 use GuzzleHttp\Middleware;
 use Laravel\Jetstream\Http\Controllers\Inertia\UserProfileController;
@@ -23,12 +24,15 @@ use Laravel\Jetstream\Http\Controllers\Inertia\UserProfileController;
 | Frontend Routes
 |--------------------------------------------------------------------------
 */
-
+// Page routes
 Route::get('/',[HomeController::class, 'index'])->name('home');
 Route::get('/categories',[HomeController::class, 'categories'])->name('categories');
 Route::get('/category/{slug}',[HomeController::class, 'postByCategory'])->name('category.posts');
 Route::get('/tag/{slug}',[HomeController::class, 'postByTag'])->name('tag.posts');
 Route::get('/post/{slug}',[HomeController::class, 'post'])->name('post.details');
+
+// Search routes
+Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
     Route::get('/dashboard',[HomeController::class,'redirectUser'])->name('dashboard');

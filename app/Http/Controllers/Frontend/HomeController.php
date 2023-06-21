@@ -25,8 +25,8 @@ class HomeController extends Controller
     public function index() 
     {
         $categories = Category::all();
-        $recentPosts = post::latest()->take(6)->where('status', true)->where('is_approved', true)->get();
-        $posts = Post::all()->where('status', true)->where('is_approved', true);
+        $recentPosts = post::latest()->take(6)->approved()->active()->get();
+        $posts = Post::approved()->active()->get();
         if($posts->count() > 0) {
             $randomPosts = $posts->random(3);
         } else {
@@ -49,22 +49,25 @@ class HomeController extends Controller
     public function postByCategory($slug) 
     {
         $category = Category::where('slug', $slug)->first();
-        $posts = $category->posts;
+        $posts = $category->posts()->approved()->active()->get();
         $bannerImage= $category->image;
         return view('frontend.Posts.index',compact('posts','bannerImage'));
     }
 
     public function postByTag($slug) 
     {
+        $searchTerm = $slug;
         $tag = Tag::where('slug', $slug)->first();
-        $posts = $tag->posts;
-        $bannerImage= null;
-        return view('frontend.Posts.index',compact('posts','bannerImage'));
+        $posts = $tag->posts()->approved()->active()->get();
+        return view('frontend.search.index',compact('posts','searchTerm'));
     }
 
     public function post($slug)
     {
-        $post = Post::where('slug', $slug)->first();
+        $post = Post::where('slug', $slug)->approved()->active()->first();
+        if (is_null($post)) {
+            abort(404);
+        }
         return view('frontend.post.index', compact('post'));
     }
 }
