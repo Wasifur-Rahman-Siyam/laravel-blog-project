@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\Backend\Admin\UserController;
 use App\Http\Controllers\Backend\Admin\CategoryController;
 use App\Http\Controllers\Backend\Admin\CommentSettingsController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Backend\User\UserController;
+use App\Http\Controllers\Backend\User\UserProfileSettingsController;
 use App\Http\Controllers\Backend\Admin\DashboardController;
 use App\Http\Controllers\Backend\Admin\PostController;
 use App\Http\Controllers\Backend\Admin\ProfileSettingsController;
@@ -49,9 +50,9 @@ Route::group(['as'=>'user.','prefix'=>'user','middleware'=>['auth:sanctum',confi
     Route::resource('post', UserPostController::class);
 
     // profile settings
-    Route::get('/settings',[UserController::class,'index'])->name('profile.settings');
-    Route::put('/profile-update',[UserController::class,'updateProfile'])->name('profile.update');
-    Route::put('/password-update',[UserController::class,'updatePassword'])->name('password.update');
+    Route::get('/settings',[UserProfileSettingsController::class,'index'])->name('profile.settings');
+    Route::put('/profile-update',[UserProfileSettingsController::class,'updateProfile'])->name('profile.update');
+    Route::put('/password-update',[UserProfileSettingsController::class,'updatePassword'])->name('password.update');
 
     // Comment settings
     Route::get('/comments/{post_id}',[UserCommentSettingsController::class,'index'])->name('comments.index');
@@ -77,14 +78,20 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth:sanctum',con
     // profile settings
     Route::get('/settings',[ProfileSettingsController::class,'index'])->name('profile.settings');
     Route::put('/profile-update',[ProfileSettingsController::class,'updateProfile'])->name('profile.update');
-    Route::put('/password-update',[ProfileSettingsController::class,'updatePassword'])->name('password.update');    
+    Route::put('/password-update',[ProfileSettingsController::class,'updatePassword'])->name('password.update');
+    
+    // User settings
+    Route::get('/users',[UserController::class,'index'])->name('users.index');
+    // Route::put('/user/{id}/admin',[UserController::class,'assignAdminRole'])->name('user.assignAdmin');
+    Route::post('/users/{user}/reassign', [UserController::class,'assignAdminRole'])->name('users.reassign');
+    Route::delete('/user/{id}',[UserController::class,'destroy'])->name('user.destroy');
     
     // Comment settings
     Route::get('/comments/{post_id}',[CommentSettingsController::class,'index'])->name('comments.index');
     Route::delete('/comments/{comment_id}',[CommentSettingsController::class,'destroy'])->name('comment.destroy');
 
     // User post approval routes
-    Route::get('pending/post',[PostController::class,'pending'])->name('post.pending');
+    Route::get('/pending/post',[PostController::class,'pending'])->name('post.pending');
     Route::put('/post/{id}/approve',[PostController::class,'approval'])->name('post.approve');
 
     // notification routes

@@ -59,6 +59,12 @@
                     <span>Pending Posts</span>
                 </a>
             </li>
+            <li class="{{Request::is('admin/users*') ? 'active': ''}}">
+                <a href="{{route('admin.users.index')}}">
+                    <i class="material-icons">face</i>
+                    <span>Users</span>
+                </a>
+            </li>
             <li class="header">System</li>
             <li class="{{Request::is('admin/settings*') ? 'active': ''}}">
                 <a href="{{route('admin.profile.settings')}}">

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Backend\User;
+
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\File; 
@@ -8,10 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
-
-class UserController extends Controller
+class UserProfileSettingsController extends Controller
 {
-    function index() 
+        function index() 
     {
         return view('backend.user.profile.index');
     }

@@ -7,7 +7,7 @@
     }
 
     function deleteFrom(){
-        if(confirm('Are u sure delete this')){
+        if(confirm('Are you sure delete this')){
             event.preventDefault();
             var from = document.getElementById("delete");
             from.submit();
@@ -15,12 +15,20 @@
     }
 
     function approvePostFrom(){
-        if(confirm('Are u sure approve this')){
+        if(confirm('Are you sure approve this')){
             event.preventDefault();
             var from = document.getElementById("approval-from");
             from.submit();
         }
     }
+
+    // function adminFrom(){
+    //     if(confirm('Are you sure make this user a admin?')){
+    //         event.preventDefault();
+    //         var from = document.getElementById("admin-from");
+    //         from.submit();
+    //     }
+    // }
 
 </script>
 

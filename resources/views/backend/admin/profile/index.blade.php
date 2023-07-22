@@ -9,7 +9,7 @@
                 @include('backend.partials.massage')
                 <div class="header">
                     <h2>
-                        TABS WITH ICON TITLE
+                        Edit Your Profile:
                     </h2>
                 </div>
                 <div class="body">
