@@ -43,7 +43,7 @@
                                     <td>
                                         <form action="{{ route('admin.users.reassign', $user->id) }}" method="POST">
                                             @csrf
-                                            <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to make this user an admin?')" >Reassign Admin</button>
+                                            <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to make this user an admin?')" >Re-assign Admin</button>
                                         </form>
                                     </td>
                                     <td>

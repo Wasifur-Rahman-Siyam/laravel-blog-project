@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\Admin\TagController;
 use App\Http\Controllers\Backend\NotificationsController;
 use App\Http\Controllers\Backend\User\UserCommentSettingsController;
 use App\Http\Controllers\Backend\User\UserDashboardController;
+use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Frontend\SearchController;
 use App\Http\Controllers\LikeController;
 use GuzzleHttp\Middleware;
@@ -35,6 +36,10 @@ Route::get('/post/{slug}',[HomeController::class, 'post'])->name('post.details')
 // Search routes
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 
+// Profile routes
+Route::get('/profile/{username}',[ProfileController::class, 'index'])->name('profile');
+
+// Dashboard route
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
     Route::get('/dashboard',[HomeController::class,'redirectUser'])->name('dashboard');
 });

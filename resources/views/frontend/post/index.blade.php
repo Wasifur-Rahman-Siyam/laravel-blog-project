@@ -22,10 +22,13 @@
                 </h6>
               <h2 class="my-4">{{$post->title}}</h2>
               <div class="d-flex justify-content-between align-items-center">
-                <span class="profile-icon d-flex gap-2">
-                  <img src="{{asset('/')}}{{$post->user->image}}" alt="">
-                  <h6 class="mb-0 mt-2">{{$post->user->name}}</h6>
-                </span>
+                <a href="{{route('profile',$post->user->username)}}">
+                  <span class="profile-icon d-flex gap-2">
+                    <img src="{{asset('/')}}{{$post->user->image}}" alt="">
+                    <h6 class="mb-0 mt-2">{{$post->user->name}}</h6>
+                  </span>
+                </a>
+
                 <p>{{$post->created_at->toFormattedDateString()}}</p>
               </div>
               <div class="blog-image my-3">

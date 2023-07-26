@@ -114,3 +114,17 @@ p{
 textarea {
     resize: none;
   }
+
+.profile-image{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.profile-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #000;
+}

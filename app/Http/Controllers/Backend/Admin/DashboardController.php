@@ -4,11 +4,20 @@ namespace App\Http\Controllers\Backend\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('backend.admin.dashboard.index');
+        $user = Auth::user();
+        $posts = $user->posts;
+        $popular_posts = $user->posts()
+        ->withCount('comments')
+        ->withCount('like_to_users')
+        ->orderBy('comments_count','desc')
+        ->orderBy('like_to_users_count','desc')
+        ->take(5)->get();
+        return view('backend.admin.dashboard.index', compact('posts','popular_posts'));
     }
 }
