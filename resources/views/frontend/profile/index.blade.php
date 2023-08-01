@@ -1,6 +1,8 @@
 @extends('frontend.master')
 
-@section('title', 'Home Page')
+@section('title')
+  {{$user->name}}
+@endsection
 
 @section('content')
         <!-- Banner area -->
