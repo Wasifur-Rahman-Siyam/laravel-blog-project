@@ -5,15 +5,15 @@
 @section('content')
         <!-- Banner area -->
           <div class="container-fluid my-5">
-            <div class="row d-flex align-content-center justify-content-center">
-              <div class="profile-image mb-5">
+            <div class="row d-flex justify-content-center">
+              <div class="profile-image mb-3">
                 <img src="{{asset('/')}}{{$user->image}}" alt="">
-                <h3 class="text-center m-3">{{$user->name}}</h3>
               </div>
+              <h3 class="text-center m-3">{{$user->name}}</h3>
             </div>
           </div>
           <!-- Featured Area -->
-          <div class="container my-4">
+          <div class="container my-3">
             <div class="row">
               @if ($posts->count() > 0)
                 @foreach ($posts as $post)

@@ -19,7 +19,7 @@ class UserDashboardController extends Controller
         ->orderBy('like_to_users_count','desc')
         ->take(5)->get();
         $pending_posts = $posts->where('is_approved', 0)->count();
-        $approved_posts = $posts->where('is_approved', 1)->count();;
+        $approved_posts = $posts->where('is_approved', 1)->count();
         return view('backend.user.dashboard.index',compact('posts','popular_posts','pending_posts', 'approved_posts'));
     }
 }
