@@ -27,12 +27,12 @@ class HomeController extends Controller
         $categories = Category::all();
         $recentPosts = post::latest()->take(6)->approved()->active()->get();
         $posts = Post::approved()->active()->get();
-        if($posts->count() > 0) {
+        if($posts->count() > 3) {
             $randomPosts = $posts->random(3);
-        } else {
-            // handle case where there are no posts available
-            $randomPosts = collect([]);
-        }
+        } 
+        else {
+            $randomPosts = $posts;
+        } 
         $topCategories = Category::withCount('posts')
         ->orderByDesc('posts_count')
         ->take(10)
