@@ -128,3 +128,17 @@ textarea {
     border-radius: 50%;
     border: 3px solid #000;
 }
+
+.social-icon {
+    display: inline-flex;
+    background-color: #fff;
+    width: 40px;
+    height: 40px;
+    color: #333;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    margin-right: 0.25rem;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+}

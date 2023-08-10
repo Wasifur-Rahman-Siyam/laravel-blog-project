@@ -33,7 +33,7 @@
             @if (Auth::check())
             <li class="nav-item">
               <a class="nav-link" href="{{route('post.liked')}}">Liked Posts</a>
-            </li>
+            </li> 
             @endif
           </ul>
 
@@ -45,7 +45,6 @@
 
 
           <ul class="navbar-nav ms-auto  mb-2 mb-lg-0">
-
             @if (!Auth::check())
             <li class="nav-item">
               <a class="nav-link text-white" href="{{route('login')}}">Log In</a>
@@ -61,6 +60,13 @@
                 </span>
               </a>
               <ul class="dropdown-menu">
+                <li class="dropdown-item">{{Auth::user()->name}}</li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <a href="{{(auth()->user()->hasRole('admin')) ? route('admin.profile.settings') : route('user.profile.settings')}}" class="dropdown-item">
+                      Profile Settings
+                  </a>
+                </li>
                 <li><a class="dropdown-item" href="{{route('dashboard')}}">Dashboard</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>
@@ -85,8 +91,42 @@
     <!--Footer section  -->
     <footer class="w-100 bg-dark">
       <div class="container text-white py-4">
+        <div class="row my-3">
+          <div class="col-md-6">
+            <h3>CREATIVE SPARKS</h3>
+            <p class="m-3 ms-0">Welcome to Creative Sparks, a vibrant multilingual hub designed to ignite your imagination. We're dedicated to producing original content and in-depth analysis. Our mission is to not only inform and educate but also to kindle the flames of inspiration. Through diverse stories and perspectives, we aim to foster insightful conversations and creative connections. Join us at Creative Sparks as we illuminate the world with ideas that set minds ablaze."</p>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <h3>
+                Contact Us: 
+              </h3>
+            </div>
+            <div class="mb-4">
+              <h5>
+                <span>
+                  <i class="fa-solid fa-envelope"></i>
+                </span> contact@creativesparksmedia.com
+              </h5>
+            </div>
+            <p>
+              <a href="https://www.facebook.com/md.wasifur.rahman.587/" target="_blank" class="social-icon">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-icon">
+                <i class="fa-brands fa-twitter"></i>
+              </a>
+              <a href="#" class="social-icon">
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+              <a href="#" class="social-icon">
+                <i class="fa-brands fa-youtube"></i>
+              </a>
+            </p>
+          </div>
+        </div>
         <div class="row text-center">
-          <p class="mb-0">&copy; {{ config('app.name') }} All Right Reserved.</p>
+          <p class="mb-0">All Right Reserved. &copy; Md. Wasifur Rahman Siyam</p>
           <p class="mb-0">Designe & Develop by Md. Wasifur Rahman Siyam</p>
         </div>
       </div>
