@@ -23,16 +23,15 @@
                 <div class="card h-100">
                   <img src="{{asset('/')}}images/posts/card/{{$randomPost->image}}" class="card-img-top" alt="" />
                   <div class="card-body">
-                    <a href="{{route('post.details',$randomPost->slug)}}" class="text-decoration-none text-black">
                       <h4 class="card-title">{{$randomPost->title}}</h4>
                       <p>{{$randomPost->created_at->toFormattedDateString()}}</p>
+                      <div class="profile-info-container">
+                        <span class="profile-icon">
+                          <img src="{{asset('/')}}{{$randomPost->user->image}}" alt="">
+                          {{$randomPost->user->name}}
+                        </span>
+                      </div>
                       <div class="d-flex align-items-center justify-content-between">
-                        <div class="profile-info-container">
-                          <span class="profile-icon">
-                            <img src="{{asset('/')}}{{$randomPost->user->image}}" alt="">
-                            {{$randomPost->user->name}}
-                          </span>
-                        </div>
                         <div class="d-flex gap-3">
                           <div class="like">
                             <i class="fa-regular fa-thumbs-up"></i>
@@ -43,8 +42,10 @@
                             {{$randomPost->comments()->count()}}
                           </div>
                         </div>
+                        <div>
+                          <a href="{{route('post.details',$randomPost->slug)}}" class="btn btn-outline-dark">View</a>
+                        </div>
                       </div>
-                    </a>
                   </div>
                 </div>
               </div>
