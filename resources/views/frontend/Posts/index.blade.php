@@ -22,28 +22,41 @@
                     <div class="card h-100">
                       <img src="{{asset('/')}}images/posts/card/{{$post->image}}" class="card-img-top" alt="" />
                       <div class="card-body">
-                        <a href="{{route('post.details',$post->slug)}}" class="text-decoration-none text-black">
                           <h4 class="card-title">{{$post->title}}</h4>
                           <p>{{$post->created_at->toFormattedDateString()}}</p>
+                          <div class="profile-info-container">
+                            <span class="profile-icon">
+                              <img src="{{asset('/')}}{{$post->user->image}}" alt="">
+                              {{$post->user->name}}
+                            </span>
+                          </div>
                           <div class="d-flex align-items-center justify-content-between">
-                            <div class="profile-info-container">
-                              <span class="profile-icon">
-                                <img src="{{asset('/')}}{{$post->user->image}}" alt="">
-                                {{$post->user->name}}
-                              </span>
-                            </div>
                             <div class="d-flex gap-3">
                               <div class="like">
-                                <i class="fa-regular fa-thumbs-up"></i>
-                                {{$post->like_to_users()->count()}}
+                                @guest
+                                <a href="{{route('login')}}" style="color:black">
+                                  <i class="fa-regular fa-thumbs-up"></i>
+                                  {{$post->like_to_users()->count()}}
+                                </a>
+                                @else
+                                  <a href="javascript:void(0);" onclick="document.getElementById('like-form-{{$post->id}}').submit();" style="color:black">
+                                    <i class="{{!Auth::user()->likedPosts()->where('post_id',$post->id)->count() == 0 ? 'fa-solid':'fa-regular'}} fa-thumbs-up"></i>
+                                    {{$post->like_to_users()->count()}}
+                                  </a>
+                                  <form id='like-form-{{$post->id}}' action="{{route('post.like',$post->id)}}" method="POST" style="display: none">
+                                    @csrf
+                                  </form> 
+                                @endguest
                               </div>
                               <div class="comment">
                                 <i class="fa-regular fa-comment"></i>
                                 {{$post->comments()->count()}}
                               </div>
                             </div>
+                            <div>
+                              <a href="{{route('post.details',$post->slug)}}" class="btn btn-outline-dark">View</a>
+                            </div>
                           </div>
-                        </a>
                       </div>
                     </div>
                   </div>

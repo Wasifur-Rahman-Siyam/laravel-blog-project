@@ -34,8 +34,20 @@
                       <div class="d-flex align-items-center justify-content-between">
                         <div class="d-flex gap-3">
                           <div class="like">
-                            <i class="fa-regular fa-thumbs-up"></i>
-                            {{$randomPost->like_to_users()->count()}}
+                            @guest
+                            <a href="{{route('login')}}" style="color:black">
+                              <i class="fa-regular fa-thumbs-up"></i>
+                              {{$randomPost->like_to_users()->count()}}
+                            </a>
+                            @else
+                              <a href="javascript:void(0);" onclick="document.getElementById('like-form-{{$randomPost->id}}').submit();" style="color:black">
+                                <i class="{{!Auth::user()->likedPosts()->where('post_id',$randomPost->id)->count() == 0 ? 'fa-solid':'fa-regular'}} fa-thumbs-up"></i>
+                                {{$randomPost->like_to_users()->count()}}
+                              </a>
+                              <form id='like-form-{{$randomPost->id}}' action="{{route('post.like',$randomPost->id)}}" method="POST" style="display: none">
+                                @csrf
+                              </form> 
+                            @endguest
                           </div>
                           <div class="comment">
                             <i class="fa-regular fa-comment"></i>
@@ -82,7 +94,7 @@
       
               <!-- side bar -->
               <div class="col-sm-3">
-                <h3 class="">Popular Categories</h3>
+                <h3 class="">Top Categories</h3>
                 <div class="mt-3">
                   @foreach ($topCategories as $topCategory) 
                   <ul class="list-group">

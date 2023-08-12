@@ -44,7 +44,7 @@
               <div class="like-comment-section p-3 d-flex gap-3 my-4">
                 <div class="like">
                   @guest
-                  <a href="{{route('register')}}" style="color:black">
+                  <a href="{{route('login')}}" style="color:black">
                     <i class="fa-regular fa-thumbs-up"></i>
                     {{$post->like_to_users()->count()}}
                   </a>
