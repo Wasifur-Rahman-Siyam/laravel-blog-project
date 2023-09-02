@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index() 
     {
         $categories = Category::all();
-        $recentPosts = post::latest()->take(6)->approved()->active()->get();
+        $recentPosts = post::latest()->take(4)->approved()->active()->get();
         $posts = Post::approved()->active()->get();
         if($posts->count() > 3) {
             $randomPosts = $posts->random(3);
